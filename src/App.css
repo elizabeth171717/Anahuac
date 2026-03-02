@@ -1,0 +1,170 @@
+
+/* ===============================
+   GLOBAL APP BACKGROUND
+================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #e8eaeb;  /* slightly darker than current */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+
+/***********Landing page*************/
+.landing-container, .login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 1rem;
+}
+
+      .landing-card {
+        background: white;
+        border-radius: 18px;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+/* =========================================
+   MENU CONTAINER
+========================================= */
+.menu-container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 16px;
+ 
+}
+
+/* =========================================
+   TOP BUTTONS
+========================================= */
+.menu-container button {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 1rem 0;
+}
+
+.menu-container button:active {
+  transform: scale(0.97);
+}
+
+.plus-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+}
+
+/* Add Section Button */
+.menu-container > button:first-of-type {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  margin-right: 10px;
+}
+
+/* Save Menu Button */
+.save-menu-btn {
+  background: #111827;
+  color: white;
+}
+
+/* =========================================
+   SECTION
+========================================= */
+.menu-section {
+margin-top: 1rem;
+}
+
+/* Section Header */
+.title-container {
+  display: flex;
+  align-items: center;
+  padding: .50rem .25rem;
+  gap: 10px;
+  color: white;
+  margin-bottom: 14px;
+  background-color: #166534;
+}
+
+.section-name {
+  font-size: 22px;
+  font-weight: 700;
+  flex: 1;
+}
+
+
+.menu-group {
+  margin: 20px 0;
+  padding: 16px;
+  border-radius: 18px;
+
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+}
+
+
+/* =========================================
+   ADD BUTTONS (Dish / Group)
+========================================= */
+
+.add-icons-container{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+ 
+}
+.add-dish button,
+.add-group button {
+  background: #ffffff;
+  border: 1px dashed #d1d5db;
+align-items: center;
+  width: 100%;
+}
+
+
+
+
+
+
+.restaurant-name-input {
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 22px;
+  font-weight: 700;
+  width: 100%;
+  transition: 0.2s ease;
+}
+
+.restaurant-name-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+
+.restaurant-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: nowrap; /* prevents wrapping */
+}
+
+.restaurant-name {
+  margin: 0;          /* remove default h1 margin */
+  white-space: nowrap; /* prevents text from pushing icon down */
+}

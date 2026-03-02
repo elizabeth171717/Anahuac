@@ -1,0 +1,129 @@
+/* =========================================
+   MODAL OVERLAY
+========================================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.55); /* matches your dark button tone */
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 16px;
+}
+
+/* =========================================
+   MODAL CONTENT
+========================================= */
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+
+  animation: modalFade 0.25s ease;
+}
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.editing-target-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  text-align: center;
+  color: #111827;
+}
+
+
+.available-checkbox,
+.visible-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.modal-content h3 {
+  font-size: 15px;
+  margin: 18px 0 10px;
+  font-weight: 700;
+  color: #374151;
+}
+
+
+.item-modifier-row,
+.costume-property-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.item-modifier-row input,
+.costume-property-row input {
+  flex: 1;
+}
+
+.modifier-add-btn,
+.custom-property-add-btn {
+  width: 100%;
+  background: #ffffff;
+  border: 1px dashed #d1d5db;
+  border-radius: 14px;
+  padding: 10px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  transition: 0.2s ease;
+}
+
+.modifier-add-btn:hover,
+.custom-property-add-btn:hover {
+  background: #f3f4f6;
+}
+
+.action-buttons-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancel-btn {
+  flex: 1;
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.save-btn {
+  flex: 1;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 12px;
+  border-radius: 14px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.cancel-btn:active,
+.save-btn:active {
+  transform: scale(0.96);
+}

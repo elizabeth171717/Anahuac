@@ -1,0 +1,261 @@
+import { Trash2, Copy, Plus, Pencil } from "lucide-react";
+import { useState } from "react";
+import Group from "./Group";
+import ItemCard from "./ItemCard";
+import ItemForm from "./ItemForm";
+import GroupForm from "./GroupForm";
+import "./Modal.css";
+
+const Section = ({ section, setMenu, onEditSection }) => {
+  const safeGroups = section.groups || [];
+  const safeItems = section.items || [];
+
+  const [editingGroupId, setEditingGroupId] = useState(null);
+  const [showGroupForm, setShowGroupForm] = useState(false);
+  const [groupDraftName, setGroupDraftName] = useState("");
+
+  const [showDishForm, setShowDishForm] = useState(false);
+
+  // ✅ EXACT SAME STATE STRUCTURE AS GROUP
+  const [dishDraft, setDishDraft] = useState({
+    name: "",
+    description: "",
+    price: "",
+    image: "",
+    available: true,
+    visible: true,
+    modifiers: [],
+    customProperties: [],
+  });
+
+  const [editingTarget, setEditingTarget] = useState(null);
+
+  // ---------------- DELETE SECTION ----------------
+  const handleDeleteSection = () => {
+    setMenu((prev) => {
+      const menu = structuredClone(prev);
+      menu.sections = menu.sections.filter((s) => s.id !== section.id);
+      return menu;
+    });
+  };
+
+  // ---------------- DUPLICATE SECTION ----------------
+  const handleDuplicateSection = () => {
+    setMenu((prev) => {
+      const menu = structuredClone(prev);
+      const newSection = structuredClone(section);
+
+      newSection.id = crypto.randomUUID();
+      newSection.sectionName += " (Copy)";
+
+      newSection.items = (newSection.items || []).map((item) => ({
+        ...structuredClone(item),
+        id: crypto.randomUUID(),
+      }));
+
+      newSection.groups = (newSection.groups || []).map((group) => ({
+        ...structuredClone(group),
+        id: crypto.randomUUID(),
+        items: (group.items || []).map((item) => ({
+          ...structuredClone(item),
+          id: crypto.randomUUID(),
+        })),
+      }));
+
+      menu.sections.push(newSection);
+      return menu;
+    });
+  };
+
+  // ---------------- OPEN CREATE DISH ----------------
+  const handleAddDish = () => {
+    setEditingTarget(null);
+    setDishDraft({
+      name: "",
+      description: "",
+      price: "",
+      image: "",
+      available: true,
+      visible: true,
+      modifiers: [],
+      customProperties: [],
+    });
+    setShowDishForm(true);
+  };
+
+  // ---------------- OPEN EDIT DISH ----------------
+  const openEditDish = (itemId) => {
+    const itemToEdit = section.items.find((i) => i.id === itemId);
+    if (!itemToEdit) return;
+
+    setDishDraft(structuredClone(itemToEdit));
+    setEditingTarget({ itemId });
+    setShowDishForm(true);
+  };
+
+  // ---------------- CREATE OR EDIT DISH ----------------
+  const createDish = () => {
+    if (!dishDraft.name.trim()) return;
+
+    setMenu((prev) => {
+      const menu = structuredClone(prev);
+      const sectionToUpdate = menu.sections.find((s) => s.id === section.id);
+      if (!sectionToUpdate) return prev;
+
+      if (!sectionToUpdate.items) sectionToUpdate.items = [];
+
+      // 🔥 EDIT MODE (EXACT SAME STRUCTURE AS GROUP)
+      if (editingTarget) {
+        sectionToUpdate.items = sectionToUpdate.items.map((item) =>
+          item.id === editingTarget.itemId
+            ? { ...dishDraft, id: editingTarget.itemId }
+            : item,
+        );
+      }
+
+      // 🔥 CREATE MODE (EXACT SAME STRUCTURE AS GROUP)
+      else {
+        const newDish = {
+          id: crypto.randomUUID(),
+          ...dishDraft,
+          price: Number(dishDraft.price || 0),
+        };
+
+        sectionToUpdate.items.push(newDish);
+      }
+
+      return menu;
+    });
+
+    setDishDraft({
+      name: "",
+      description: "",
+      price: "",
+      image: "",
+      available: true,
+      visible: true,
+      modifiers: [],
+      customProperties: [],
+    });
+
+    setEditingTarget(null);
+    setShowDishForm(false);
+  };
+
+  // ---------------- ADD GROUP (UNCHANGED) ----------------
+  const saveGroup = () => {
+    if (!groupDraftName.trim()) return;
+
+    setMenu((prev) => {
+      const menu = structuredClone(prev);
+      const s = menu.sections.find((sec) => sec.id === section.id);
+      if (!s) return prev;
+
+      if (editingGroupId) {
+        s.groups = s.groups.map((g) =>
+          g.id === editingGroupId ? { ...g, groupName: groupDraftName } : g,
+        );
+      } else {
+        if (!s.groups) s.groups = [];
+
+        s.groups.push({
+          id: crypto.randomUUID(),
+          groupName: groupDraftName,
+          items: [],
+        });
+      }
+
+      return menu;
+    });
+
+    setGroupDraftName("");
+    setEditingGroupId(null);
+    setShowGroupForm(false);
+  };
+
+  return (
+    <div className="menu-section">
+      <div className="title-container">
+        <h2>{section.section}</h2>
+
+        <Pencil
+          className="pencil-icon"
+          onClick={() => onEditSection(section)}
+        />
+        <Copy className="duplicate-icon" onClick={handleDuplicateSection} />
+        <Trash2 className="trash-icon" onClick={handleDeleteSection} />
+      </div>
+
+      <div className="add-icons-container">
+        <div className="add-dish">
+          <button onClick={handleAddDish}>
+            <Plus className="plus-icon" /> Add Dish
+          </button>
+        </div>
+
+        <div className="add-group">
+          <button
+            onClick={() => {
+              setGroupDraftName("");
+              setEditingGroupId(null);
+              setShowGroupForm(true);
+            }}
+          >
+            <Plus className="plus-icon" /> Add Group
+          </button>
+        </div>
+      </div>
+
+      {safeGroups.map((group) => (
+        <Group
+          key={group.id}
+          sectionId={section.id}
+          group={group}
+          setMenu={setMenu}
+          onEditGroup={(group) => {
+            setGroupDraftName(group.groupName);
+            setEditingGroupId(group.id);
+            setShowGroupForm(true);
+          }}
+        />
+      ))}
+      <div className="menu-items-grid">
+        {safeItems.map((item) => (
+          <ItemCard
+            key={item.id}
+            item={item}
+            sectionId={section.id}
+            setMenu={setMenu}
+            openEditDish={() => openEditDish(item.id)}
+          />
+        ))}
+      </div>
+      {showDishForm && (
+        <ItemForm
+          show={showDishForm}
+          dishDraft={dishDraft}
+          setDishDraft={setDishDraft}
+          editingTarget={editingTarget}
+          onClose={() => setShowDishForm(false)}
+          onSave={createDish}
+        />
+      )}
+
+      {showGroupForm && (
+        <GroupForm
+          groupDraftName={groupDraftName}
+          setGroupDraftName={setGroupDraftName}
+          onClose={() => {
+            setShowGroupForm(false);
+            setEditingGroupId(null);
+            setGroupDraftName("");
+          }}
+          onSave={saveGroup}
+          isEditing={!!editingGroupId}
+        />
+      )}
+    </div>
+  );
+};
+
+export default Section;
