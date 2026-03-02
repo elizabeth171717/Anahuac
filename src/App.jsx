@@ -4,7 +4,8 @@ import AdminDashboard from "./Pages/AdminDashboard";
 import UserDashboard from "./Pages/UserDashboard";
 import Security from "./Pages/Security";
 import LandingPage from "./Pages/LandingPage";
-import SignupPage from "./Pages/SingUpPage";
+import SignupPage from "./Pages/SingupPage";
+
 import VerifyAccount from "./Pages/VerifyAccountPage";
 import EditAccountPage from "./Pages/EditAccountPage";
 import "./App.css";
