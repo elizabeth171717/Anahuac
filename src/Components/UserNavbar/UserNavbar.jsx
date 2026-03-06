@@ -21,7 +21,9 @@ export default function UserNavbar() {
         <User size={22} />
         {/* you can swap <User /> for <Pencil /> */}
       </div>
-      <button onClick={handleLogout}>Logout</button>
+      <button className="btn" onClick={handleLogout}>
+        Logout
+      </button>
     </nav>
   );
 }

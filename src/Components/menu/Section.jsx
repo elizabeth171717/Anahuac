@@ -188,13 +188,14 @@ const Section = ({ section, setMenu, onEditSection }) => {
 
       <div className="add-icons-container">
         <div className="add-dish">
-          <button onClick={handleAddDish}>
+          <button className="btn" onClick={handleAddDish}>
             <Plus className="plus-icon" /> Add Dish
           </button>
         </div>
 
         <div className="add-group">
           <button
+            className="btn"
             onClick={() => {
               setGroupDraftName("");
               setEditingGroupId(null);

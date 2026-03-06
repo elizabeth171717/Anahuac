@@ -104,13 +104,13 @@ const MenuPage = () => {
         <RestaurantNameEditor menu={menu} setMenu={setMenu} />
 
         {/* ADD SECTION BUTTON */}
-        <button type="button" onClick={handleAddSection}>
+        <button className="btn" type="button" onClick={handleAddSection}>
           <Plus className="plus-icon" />
           Add Section
         </button>
 
         {/* MASTER SAVE MENU BUTTON */}
-        <button type="button" className="save-menu-btn" onClick={saveMenu}>
+        <button type="button" className=" btn save-menu-btn" onClick={saveMenu}>
           Save Menu
         </button>
 

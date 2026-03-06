@@ -1,0 +1,93 @@
+/* BASE BUTTON */
+
+.btn {
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
+
+  /* nice mobile feel */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* TAP FEEDBACK */
+
+.btn:active {
+  transform: scale(0.96);
+  filter: brightness(0.95);
+}
+
+/* PRIMARY */
+
+.btn-primary {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+}
+
+/* SECONDARY */
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+
+/* OUTLINE / DASHED (ADD NEW ITEM) */
+
+.btn-dashed {
+  width: 100%;
+  background: white;
+  border: 1px dashed #d1d5db;
+  font-weight: 600;
+}
+
+.btn-dashed:hover {
+  background: #f3f4f6;
+}
+
+/* FULL WIDTH */
+
+.btn-full {
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+/* =========================================
+   TOP BUTTONS
+========================================= */
+
+
+.plus-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+}
+
+/* Add Section Button */
+.menu-container > button:first-of-type {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  margin-right: 10px;
+}
+
+/* Save Menu Button */
+.save-menu-btn {
+  background: #111827;
+  color: white;
+}
+
+

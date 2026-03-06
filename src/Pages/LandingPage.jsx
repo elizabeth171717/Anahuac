@@ -10,9 +10,13 @@ export default function LandingPage() {
         <p>Manage your restaurant menu from one place.</p>
 
         <div className="landing-buttons">
-          <button onClick={() => navigate("/login")}>Login</button>
+          <button onClick={() => navigate("/login")} className="btn">
+            Login
+          </button>
 
-          <button onClick={() => navigate("/signup")}>Create Account</button>
+          <button onClick={() => navigate("/signup")} className="btn">
+            Create Account
+          </button>
         </div>
       </div>
     </div>

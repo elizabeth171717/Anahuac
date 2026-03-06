@@ -38,10 +38,13 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="login-container">
+    <div className="signup-container">
+      <button className="back-btn" onClick={() => navigate(-1)}>
+        ← Back
+      </button>
       <h2>Create Your Account</h2>
 
-      <form onSubmit={handleSignup}>
+      <form className="signup-box" onSubmit={handleSignup}>
         <input
           type="text"
           placeholder="Your Name"
@@ -66,13 +69,7 @@ export default function SignupPage() {
           required
         />
 
-        <div
-          style={{
-            position: "relative",
-            display: "inline-block",
-            width: "100%",
-          }}
-        >
+        <div className="pw-input">
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
@@ -89,7 +86,9 @@ export default function SignupPage() {
             )}
           </span>
         </div>
-        <button type="submit">Create Account</button>
+        <button type="submit" className="btn">
+          Create Account
+        </button>
       </form>
     </div>
   );

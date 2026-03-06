@@ -15,7 +15,8 @@ export default function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault(); // 🚨 stop page reload
     try {
       const res = await axios.post(`${BACKEND_URL}/auth/${client}/login`, {
         email,
@@ -42,27 +43,43 @@ export default function Login() {
 
   return (
     <div className="login-container">
+      <button className="back-btn" onClick={() => navigate(-1)}>
+        ← Back
+      </button>
       <h2>Login</h2>
-      <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-
-      <div style={{ position: "relative", display: "inline-block" }}>
+      <form className="login-box" onSubmit={handleLogin}>
         <input
-          type={showPassword ? "text" : "password"}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          type="email"
+          autoComplete="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
         />
 
-        <span onClick={() => setShowPassword((prev) => !prev)}>
-          {showPassword ? (
-            <i className="fa-solid fa-eye-slash"></i>
-          ) : (
-            <i className="fa-solid fa-eye"></i>
-          )}
-        </span>
-      </div>
+        <div className="pw-input">
+          <input
+            type={showPassword ? "text" : "password"}
+            value={password}
+            autoComplete="current-password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+          />
 
-      <button onClick={handleLogin}>Login</button>
+          <span onClick={() => setShowPassword((prev) => !prev)}>
+            {showPassword ? (
+              <i className="fa-solid fa-eye-slash"></i>
+            ) : (
+              <i className="fa-solid fa-eye"></i>
+            )}
+          </span>
+        </div>
+
+        <button type="submit" className="btn">
+          Login
+        </button>
+      </form>
     </div>
   );
 }

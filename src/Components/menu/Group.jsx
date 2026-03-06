@@ -144,9 +144,9 @@ const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
           <Copy className="duplicate-icon" onClick={handleDuplicateGroup} />
           <Trash2 className="trash-icon" onClick={handleDeleteGroup} />
           <div className="add-dish">
-            <button onClick={handleAddDish}>
+            <button className="btn" onClick={handleAddDish}>
               <Plus />
-              Add Dish
+              Dish
             </button>
           </div>
         </div>

@@ -54,7 +54,7 @@ export default function AdminDashboard() {
         </tbody>
       </table>
       <Link to="/security">
-        <button>🔒 Change Password</button>
+        <button className="btn">🔒 Change Password</button>
       </Link>
     </div>
   );
