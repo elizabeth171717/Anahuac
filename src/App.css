@@ -8,8 +8,17 @@
   padding: 0;
 }
 body {
-  background: #4c4c4d;  /* slightly darker than current */
+  background: #caffb6;  /* slightly darker than current */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* =========================================
+   GLOBAL ICON INTERACTION
+========================================= */
+
+.icon{
+  color:red;
+  cursor: pointer;
 }
 
 
@@ -67,7 +76,7 @@ body {
 .menu-container {
   max-width: 1400px;
   margin: auto;
-  padding: 16px;
+
  
 }
 
@@ -99,8 +108,7 @@ margin-top: 1rem;
 
 .menu-group {
   margin: 20px 0;
-  padding: 16px;
-  border-radius: 18px;
+
 
   background: #f8fafc;
   border: 1px solid #e5e7eb;
@@ -111,22 +119,12 @@ margin-top: 1rem;
    ADD BUTTONS (Dish / Group)
 ========================================= */
 
-.add-icons-container{
+.btns-container{
   display: flex;
   justify-content: center;
   gap: 10px;
  
 }
-.add-dish button,
-.add-group button {
-  background: #ffffff;
-  border: 1px dashed #d1d5db;
-align-items: center;
-  width: 100%;
-}
-
-
-
 
 
 

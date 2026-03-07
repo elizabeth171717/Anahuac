@@ -58,11 +58,11 @@ const ItemCard = ({
       {/* ACTIONS */}
       <div className="icons-container">
         <Pencil
-          className="edit"
+          className="icon edit-icon"
           onClick={() => openEditDish(sectionId, groupId, item.id)}
         />
-        <Copy className="duplicate" onClick={handleDuplicate} />
-        <Trash2 className="delete" onClick={handleDelete} />
+        <Copy className="icon duplicate-icon" onClick={handleDuplicate} />
+        <Trash2 className="icon trash-icon" onClick={handleDelete} />
       </div>
       {/* IMAGE */}
       {item.image && (
@@ -71,8 +71,9 @@ const ItemCard = ({
       <div className="card-details">
         {/* NAME */}
         <div className="name-price">
-          <h3 className="item-name">{item.name}</h3> {/* PRICE */}
-          <p className="item-price">${item.price}</p>
+          <p className="item-price">
+            ${item.price} {item.name}
+          </p>
         </div>
         {/* DESCRIPTION */}
         {item.description && (

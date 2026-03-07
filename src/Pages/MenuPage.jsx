@@ -105,7 +105,7 @@ const MenuPage = () => {
 
         {/* ADD SECTION BUTTON */}
         <button className="btn" type="button" onClick={handleAddSection}>
-          <Plus className="plus-icon" />
+          <Plus className="icon plus-icon" />
           Add Section
         </button>
 

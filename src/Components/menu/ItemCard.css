@@ -16,36 +16,33 @@
   display: none;
 }
 
-/* Wrap your ItemCard map inside a div with this class if not already */
 .menu-items-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
+display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 16px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+
+  -webkit-overflow-scrolling: touch;
 }
 
-/* LARGE SCREENS AUTO FIT */
-@media (min-width: 768px) {
-  .menu-items-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  }
-}
-
-/* =========================================
-   ITEM CARD
-========================================= */
 .menu-item-card {
+   flex: 0 0 80%; /* main trick */
+
+  scroll-snap-align: center;
+
   background: white;
   border-radius: 20px;
-  
-  min-height: 210px;
-   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e5e7eb; /* subtle border for separation */
- position: relative;
-  overflow: hidden;
-  margin: 1rem 0;
+
+  min-height: 220px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid #e5e7eb;
+
+  padding: 14px;
 }
-
-
 
 /* =========================================
    CARD ICONS
@@ -78,11 +75,9 @@
    NAME + PRICE
 ========================================= */
 .name-price {
-  display: flex;
- gap: .50rem;
-  align-items: center;
-  margin-bottom: 6px;
-}
+ display: flex;
+font-weight: bold;
+gap: .50rem;}
 
 
 

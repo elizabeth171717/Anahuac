@@ -179,17 +179,20 @@ const Section = ({ section, setMenu, onEditSection }) => {
         <h2>{section.section}</h2>
 
         <Pencil
-          className="pencil-icon"
+          className="icon edit-icon"
           onClick={() => onEditSection(section)}
         />
-        <Copy className="duplicate-icon" onClick={handleDuplicateSection} />
-        <Trash2 className="trash-icon" onClick={handleDeleteSection} />
+        <Copy
+          className="icon duplicate-icon"
+          onClick={handleDuplicateSection}
+        />
+        <Trash2 className="icon trash-icon" onClick={handleDeleteSection} />
       </div>
 
-      <div className="add-icons-container">
+      <div className="btns-container">
         <div className="add-dish">
           <button className="btn" onClick={handleAddDish}>
-            <Plus className="plus-icon" /> Add Dish
+            <Plus className="icon add-icon" /> Add Dish
           </button>
         </div>
 
@@ -202,7 +205,7 @@ const Section = ({ section, setMenu, onEditSection }) => {
               setShowGroupForm(true);
             }}
           >
-            <Plus className="plus-icon" /> Add Group
+            <Plus className="icon add-icon" /> Add Group
           </button>
         </div>
       </div>
