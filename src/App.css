@@ -17,7 +17,7 @@ body {
 ========================================= */
 
 .icon{
-  color:red;
+  font-weight: bold;
   cursor: pointer;
 }
 
@@ -73,6 +73,9 @@ body {
 /* =========================================
    MENU CONTAINER
 ========================================= */
+.welcome-msg{
+  padding: 1rem .50rem;
+}
 .menu-container {
   max-width: 1400px;
   margin: auto;
@@ -80,6 +83,17 @@ body {
  
 }
 
+.restaurant-title-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .50rem .25rem;
+  gap: 10px;
+ 
+  margin-bottom: 14px;
+ 
+  flex-wrap: wrap;
+}
 
 /* =========================================
    SECTION

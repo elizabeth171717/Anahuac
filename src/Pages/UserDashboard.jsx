@@ -6,13 +6,16 @@ export default function Dashboard() {
   const restaurantName = localStorage.getItem("restaurantName");
 
   return (
-    <div className="dashboard-container">
+    <div className="user-dashboard-page">
       <UserNavbar />
-      <h1>Welcome , {name} 👋</h1>
-      <p>
-        Ready to build the menu for <strong>{restaurantName}</strong>?
-      </p>
-      <div>
+      <div className="welcome-msg">
+        <h2>Welcome , {name} 👋</h2>
+
+        <p>
+          Ready to build the menu for <strong>{restaurantName}</strong>?
+        </p>
+      </div>
+      <div className="menu-page-div">
         <MenuPage />
       </div>
     </div>

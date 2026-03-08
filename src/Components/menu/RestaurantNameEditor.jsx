@@ -23,7 +23,7 @@ const RestaurantNameEditor = ({ menu, setMenu }) => {
       ) : (
         <>
           <div className="restaurant-title-container">
-            <h1 className="restaurant-name">{menu.restaurantName} </h1>
+            <h2 className="restaurant-name">{menu.restaurantName} </h2>
 
             <Pencil className="pencil-icon" onClick={() => setEditing(true)} />
           </div>

@@ -101,14 +101,15 @@ const MenuPage = () => {
     <div className="page">
       <div className="menu-container">
         {/* RESTAURANT NAME */}
-        <RestaurantNameEditor menu={menu} setMenu={setMenu} />
+        <div className="restaurant-title-container">
+          <RestaurantNameEditor menu={menu} setMenu={setMenu} />
 
-        {/* ADD SECTION BUTTON */}
-        <button className="btn" type="button" onClick={handleAddSection}>
-          <Plus className="icon plus-icon" />
-          Add Section
-        </button>
-
+          {/* ADD SECTION BUTTON */}
+          <button className="btn" type="button" onClick={handleAddSection}>
+            <Plus className="icon plus-icon" />
+            Add Section
+          </button>
+        </div>
         {/* MASTER SAVE MENU BUTTON */}
         <button type="button" className=" btn save-menu-btn" onClick={saveMenu}>
           Save Menu

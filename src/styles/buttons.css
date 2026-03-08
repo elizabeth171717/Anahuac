@@ -71,18 +71,6 @@
 ========================================= */
 
 
-.plus-icon {
-  width: 18px;
-  height: 18px;
-  margin-right: 6px;
-}
-
-/* Add Section Button */
-.menu-container > button:first-of-type {
-  background: linear-gradient(135deg, #4f46e5, #6366f1);
-  color: white;
-  margin-right: 10px;
-}
 
 /* Save Menu Button */
 .save-menu-btn {

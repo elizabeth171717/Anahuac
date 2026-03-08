@@ -138,7 +138,7 @@ const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
     <>
       <div className="menu-group">
         {/* HEADER */}
-        <div className="">
+        <div className="group-header">
           <h3>{group.groupName}</h3>
           <Pencil
             className="icon edit-icon"

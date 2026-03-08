@@ -16,16 +16,26 @@
   display: none;
 }
 
+.menu-items-grid::before,
+.menu-items-grid::after {
+  content: "";
+  flex: 0 0 10%;
+}
+
 .menu-items-grid {
 display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   gap: 16px;
-
-  padding-left: 20px;
-  padding-right: 20px;
-
+justify-content: center;
+  scroll-behavior: smooth;
+padding: 0 10vw; /* space so cards can peek */
   -webkit-overflow-scrolling: touch;
+  margin: 1rem 0;
+}
+
+.menu-items-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .menu-item-card {
@@ -40,8 +50,9 @@ display: flex;
 
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   border: 1px solid #e5e7eb;
+ position: relative;   /* IMPORTANT */
+  overflow: hidden;
 
-  padding: 14px;
 }
 
 /* =========================================
@@ -53,6 +64,7 @@ display: flex;
   right: 1rem;
   display: flex;
   gap: 1rem;
+    z-index: 10; /* ensures icons stay above image */
 }
 
 
