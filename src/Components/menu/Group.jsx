@@ -138,17 +138,20 @@ const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
     <>
       <div className="menu-group">
         {/* HEADER */}
-        <div className="group-header">
+        <div className="group-tittle-wrapper">
           <h3>{group.groupName}</h3>
-          <Pencil
-            className="icon edit-icon"
-            onClick={() => onEditGroup(group)}
-          />
-          <Copy
-            className="icon duplicate-icon"
-            onClick={handleDuplicateGroup}
-          />
-          <Trash2 className="icon trash-icon" onClick={handleDeleteGroup} />
+          <div className="icons">
+            <Pencil
+              className="icon edit-icon"
+              onClick={() => onEditGroup(group)}
+            />
+            <Copy
+              className="icon duplicate-icon"
+              onClick={handleDuplicateGroup}
+            />
+
+            <Trash2 className="icon trash-icon" onClick={handleDeleteGroup} />
+          </div>
           <div className="add-dish">
             <button className="btn" onClick={handleAddDish}>
               <Plus className="icon add-icon" />

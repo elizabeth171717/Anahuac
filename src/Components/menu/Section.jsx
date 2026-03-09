@@ -1,5 +1,6 @@
 import { Trash2, Copy, Plus, Pencil } from "lucide-react";
 import { useState } from "react";
+
 import Group from "./Group";
 import ItemCard from "./ItemCard";
 import ItemForm from "./ItemForm";
@@ -175,41 +176,43 @@ const Section = ({ section, setMenu, onEditSection }) => {
 
   return (
     <div className="menu-section">
-      <div className="title-container">
-        <h2>{section.section}</h2>
-
-        <Pencil
-          className="icon edit-icon"
-          onClick={() => onEditSection(section)}
-        />
-        <Copy
-          className="icon duplicate-icon"
-          onClick={handleDuplicateSection}
-        />
-        <Trash2 className="icon trash-icon" onClick={handleDeleteSection} />
-      </div>
-
-      <div className="btns-container">
-        <div className="add-dish">
-          <button className="btn" onClick={handleAddDish}>
-            <Plus className="icon add-icon" /> Add Dish
-          </button>
+      <div className="section-tittle-wrapper">
+        <div className="title-container">
+          <h2>{section.section}</h2>
+        </div>
+        <div className="icons">
+          <Pencil
+            className="icon edit-icon"
+            onClick={() => onEditSection(section)}
+          />
+          <Copy
+            className="icon duplicate-icon"
+            onClick={handleDuplicateSection}
+          />
+          <Trash2 className="icon trash-icon" onClick={handleDeleteSection} />
         </div>
 
-        <div className="add-group">
-          <button
-            className="btn"
-            onClick={() => {
-              setGroupDraftName("");
-              setEditingGroupId(null);
-              setShowGroupForm(true);
-            }}
-          >
-            <Plus className="icon add-icon" /> Add Group
-          </button>
+        <div className="btns-container">
+          <div className="add-dish">
+            <button className="btn" onClick={handleAddDish}>
+              <Plus className="icon add-icon" /> Dish
+            </button>
+          </div>
+
+          <div className="add-group">
+            <button
+              className="btn"
+              onClick={() => {
+                setGroupDraftName("");
+                setEditingGroupId(null);
+                setShowGroupForm(true);
+              }}
+            >
+              <Plus className="icon add-icon" /> Group
+            </button>
+          </div>
         </div>
       </div>
-
       {safeGroups.map((group) => (
         <Group
           key={group.id}

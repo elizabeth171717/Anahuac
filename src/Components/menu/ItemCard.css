@@ -16,23 +16,20 @@
   display: none;
 }
 
-.menu-items-grid::before,
-.menu-items-grid::after {
-  content: "";
-  flex: 0 0 10%;
-}
 
 .menu-items-grid {
 display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  gap: 16px;
-justify-content: center;
+  gap: 1rem;
+
   scroll-behavior: smooth;
-padding: 0 10vw; /* space so cards can peek */
+  
   -webkit-overflow-scrolling: touch;
-  margin: 1rem 0;
+  margin: 1rem ;
 }
+
+
 
 .menu-items-grid::-webkit-scrollbar {
   display: none;

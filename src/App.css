@@ -83,64 +83,38 @@ body {
  
 }
 
-.restaurant-title-container{
+
+/* =========================================
+  RESTAURANT NAME/EDITOR
+========================================= */
+
+.menu-name-container{
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: .50rem .25rem;
-  gap: 10px;
- 
-  margin-bottom: 14px;
+ padding: 1rem .50rem;
+  gap: 1rem;
+ text-align: center;
+justify-content: center;
  
   flex-wrap: wrap;
-}
-
-/* =========================================
-   SECTION
-========================================= */
-.menu-section {
-margin-top: 1rem;
-}
-
-/* Section Header */
-.title-container {
-  display: flex;
-  align-items: center;
-  padding: .50rem .25rem;
-  gap: 10px;
-  color: white;
-  margin-bottom: 14px;
-  background-color: #166534;
-}
-
-.section-name {
-  font-size: 22px;
-  font-weight: 700;
-  flex: 1;
-}
-
-
-.menu-group {
-  margin: 20px 0;
-
-
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
-}
-
-
-/* =========================================
-   ADD BUTTONS (Dish / Group)
-========================================= */
-
-.btns-container{
-  display: flex;
-  justify-content: center;
-  gap: 10px;
  
 }
 
 
+
+.restaurant-name-container {
+  display: flex;
+ gap: 1rem;
+  flex-wrap: nowrap; /* prevents wrapping */
+
+ align-items: center;
+ 
+}
+
+.restaurant-name {
+  margin: 0;          /* remove default h1 margin */
+  white-space: nowrap; /* prevents text from pushing icon down */
+}
 
 .restaurant-name-input {
   padding: 10px 14px;
@@ -161,15 +135,57 @@ margin-top: 1rem;
 }
 
 
-.restaurant-title-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: nowrap; /* prevents wrapping */
+/* =========================================
+  SECTIONS NAME
+========================================= */
+.menu-section {
+margin-top: 1rem;
 }
 
-.restaurant-name {
-  margin: 0;          /* remove default h1 margin */
-  white-space: nowrap; /* prevents text from pushing icon down */
+.section-tittle-wrapper{
+  display: flex;
+  align-items: center;
+  gap:1rem;
+   background-color: #166534;
+   padding: .50rem .25rem;
+}
+.icons{
+display: flex;
+gap: 1rem;
+}
+
+
+/* =========================================
+   ADD BUTTONS (Dish / Group)
+========================================= */
+
+.btns-container{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+ 
+}
+
+/* =========================================
+   SECTION
+========================================= */
+
+
+.menu-group {
+  margin: 2rem 0;
+
+
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+}
+
+
+
+.group-tittle-wrapper{
+   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:1rem;
+   flex-wrap: wrap;
+   padding: .50rem .25rem;
 }
