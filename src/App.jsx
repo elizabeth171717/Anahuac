@@ -11,6 +11,7 @@ import EditAccountPage from "./Pages/EditAccountPage";
 import "./App.css";
 import "./styles/forms.css";
 import "./styles/buttons.css";
+import "./styles/icons.css";
 function App() {
   return (
     <Routes>

@@ -12,14 +12,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* =========================================
-   GLOBAL ICON INTERACTION
-========================================= */
 
-.icon{
-  font-weight: bold;
-  cursor: pointer;
-}
 
 
 /***********Landing page*************/
@@ -147,7 +140,8 @@ margin-top: 1rem;
   align-items: center;
   gap:1rem;
    background-color: #166534;
-   padding: .50rem .25rem;
+   padding: .50rem ;
+   flex-wrap: wrap;
 }
 .icons{
 display: flex;
@@ -156,18 +150,18 @@ gap: 1rem;
 
 
 /* =========================================
-   ADD BUTTONS (Dish / Group)
+   ADD BUTTONS CONTAINER
 ========================================= */
 
 .btns-container{
   display: flex;
   justify-content: center;
   gap: 1rem;
- 
+ flex-wrap: wrap;
 }
 
 /* =========================================
-   SECTION
+   GROUP CONTAINER
 ========================================= */
 
 
@@ -187,5 +181,6 @@ gap: 1rem;
   justify-content: center;
   gap:1rem;
    flex-wrap: wrap;
-   padding: .50rem .25rem;
+   padding: .50rem ;
+   font-family: cursive;
 }

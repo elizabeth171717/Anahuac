@@ -1,0 +1,9 @@
+/* =========================================
+   GLOBAL ICON INTERACTION
+========================================= */
+
+.icon{
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 22px;
+}
