@@ -1,4 +1,11 @@
-import { Trash2, Copy, Plus, Pencil } from "lucide-react";
+import {
+  Trash2,
+  Copy,
+  Plus,
+  Pencil,
+  ChevronDown,
+  ChevronRight,
+} from "lucide-react";
 import { useState } from "react";
 
 import Group from "./Group";
@@ -10,7 +17,7 @@ import "./Modal.css";
 const Section = ({ section, setMenu, onEditSection }) => {
   const safeGroups = section.groups || [];
   const safeItems = section.items || [];
-
+  const [collapsed, setCollapsed] = useState(false);
   const [editingGroupId, setEditingGroupId] = useState(null);
   const [showGroupForm, setShowGroupForm] = useState(false);
   const [groupDraftName, setGroupDraftName] = useState("");
@@ -180,6 +187,7 @@ const Section = ({ section, setMenu, onEditSection }) => {
         <div className="title-container">
           <h2>{section.section}</h2>
         </div>
+
         <div className="icons">
           <Pencil
             className="icon edit-icon"
@@ -190,6 +198,12 @@ const Section = ({ section, setMenu, onEditSection }) => {
             onClick={handleDuplicateSection}
           />
           <Trash2 className="icon trash-icon" onClick={handleDeleteSection} />
+          <button
+            className="icon collapse-btn"
+            onClick={() => setCollapsed(!collapsed)}
+          >
+            {collapsed ? <ChevronRight /> : <ChevronDown />}
+          </button>
         </div>
 
         <div className="btns-container">
@@ -213,30 +227,37 @@ const Section = ({ section, setMenu, onEditSection }) => {
           </div>
         </div>
       </div>
-      {safeGroups.map((group) => (
-        <Group
-          key={group.id}
-          sectionId={section.id}
-          group={group}
-          setMenu={setMenu}
-          onEditGroup={(group) => {
-            setGroupDraftName(group.groupName);
-            setEditingGroupId(group.id);
-            setShowGroupForm(true);
-          }}
-        />
-      ))}
-      <div className="menu-items-grid">
-        {safeItems.map((item) => (
-          <ItemCard
-            key={item.id}
-            item={item}
-            sectionId={section.id}
-            setMenu={setMenu}
-            openEditDish={() => openEditDish(item.id)}
-          />
-        ))}
-      </div>
+
+      {!collapsed && (
+        <>
+          {safeGroups.map((group) => (
+            <Group
+              key={group.id}
+              sectionId={section.id}
+              group={group}
+              setMenu={setMenu}
+              onEditGroup={(group) => {
+                setGroupDraftName(group.groupName);
+                setEditingGroupId(group.id);
+                setShowGroupForm(true);
+              }}
+            />
+          ))}
+
+          <div className="menu-items-grid">
+            {safeItems.map((item) => (
+              <ItemCard
+                key={item.id}
+                item={item}
+                sectionId={section.id}
+                setMenu={setMenu}
+                openEditDish={() => openEditDish(item.id)}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
       {showDishForm && (
         <ItemForm
           show={showDishForm}

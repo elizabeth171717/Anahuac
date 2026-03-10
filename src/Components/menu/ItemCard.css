@@ -57,7 +57,7 @@ display: flex;
 ========================================= */
 .icons-container {
   position: absolute;
-  top: 8px;
+  top: .75rem;
   right: 1rem;
   display: flex;
   gap: 1rem;
