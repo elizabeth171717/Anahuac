@@ -101,6 +101,23 @@ const Section = ({ section, setMenu, onEditSection }) => {
     setShowDishForm(true);
   };
 
+  // ---------------- CLEAN DISH ----------------
+  const cleanDish = (dish) => {
+    return {
+      ...dish,
+      price: dish.price && Number(dish.price) > 0 ? Number(dish.price) : "",
+      modifiers: (dish.modifiers || [])
+        .filter((m) => m.name || m.price)
+        .map((m) => ({
+          ...m,
+          price: m.price && Number(m.price) > 0 ? Number(m.price) : "",
+        })),
+      customProperties: (dish.customProperties || []).filter(
+        (p) => p.key && p.value,
+      ),
+    };
+  };
+
   // ---------------- CREATE OR EDIT DISH ----------------
   const createDish = () => {
     if (!dishDraft.name.trim()) return;
@@ -116,17 +133,18 @@ const Section = ({ section, setMenu, onEditSection }) => {
       if (editingTarget) {
         sectionToUpdate.items = sectionToUpdate.items.map((item) =>
           item.id === editingTarget.itemId
-            ? { ...dishDraft, id: editingTarget.itemId }
+            ? { ...cleanDish(dishDraft), id: editingTarget.itemId }
             : item,
         );
       }
 
       // 🔥 CREATE MODE (EXACT SAME STRUCTURE AS GROUP)
       else {
+        const cleanedDish = cleanDish(dishDraft);
+
         const newDish = {
           id: crypto.randomUUID(),
-          ...dishDraft,
-          price: Number(dishDraft.price || 0),
+          ...cleanedDish,
         };
 
         sectionToUpdate.items.push(newDish);

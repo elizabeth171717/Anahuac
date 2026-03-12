@@ -39,7 +39,7 @@ export default function SignupPage() {
 
   return (
     <div className="signup-container">
-      <button className="back-btn" onClick={() => navigate(-1)}>
+      <button className="btn back-btn" onClick={() => navigate("/")}>
         ← Back
       </button>
       <h2>Create Your Account</h2>

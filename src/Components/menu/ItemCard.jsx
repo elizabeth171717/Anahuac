@@ -1,4 +1,4 @@
-import { Trash2, Copy, Pencil } from "lucide-react";
+import { Trash2, Copy, Pencil, Eye, EyeOff } from "lucide-react";
 import "./ItemCard.css";
 
 const ItemCard = ({
@@ -53,6 +53,45 @@ const ItemCard = ({
     });
   };
 
+  const toggleVisibility = () => {
+    setMenu((prev) => {
+      const menu = structuredClone(prev);
+      const section = menu.sections.find((s) => s.id === sectionId);
+      if (!section) return prev;
+
+      let itemToUpdate;
+
+      if (groupId) {
+        const group = section.groups.find((g) => g.id === groupId);
+        if (!group) return prev;
+
+        itemToUpdate = group.items.find((i) => i.id === item.id);
+      } else {
+        itemToUpdate = section.items.find((i) => i.id === item.id);
+      }
+
+      if (!itemToUpdate) return prev;
+
+      itemToUpdate.visible = !itemToUpdate.visible;
+
+      return menu;
+    });
+  };
+
+  const price = Number(item.price);
+
+  const modifiers = item.modifiers?.filter((m) => m.name || m.price) || [];
+
+  const properties =
+    item.customProperties?.filter((p) => p.key && p.value) || [];
+
+  const modifierPrices = modifiers
+    .map((m) => Number(m.price))
+    .filter((p) => p > 0);
+
+  const minModifierPrice =
+    modifierPrices.length > 0 ? Math.min(...modifierPrices) : null;
+
   return (
     <div className="menu-item-card">
       {/* ACTIONS */}
@@ -62,6 +101,17 @@ const ItemCard = ({
           onClick={() => openEditDish(sectionId, groupId, item.id)}
         />
         <Copy className="icon duplicate-icon" onClick={handleDuplicate} />
+
+        {/* VISIBILITY TOGGLE */}
+        {item.visible ? (
+          <Eye className="icon visibility-icon" onClick={toggleVisibility} />
+        ) : (
+          <EyeOff
+            className="icon visibility-icon hidden-icon"
+            onClick={toggleVisibility}
+          />
+        )}
+
         <Trash2 className="icon trash-icon" onClick={handleDelete} />
       </div>
       {/* IMAGE */}
@@ -69,11 +119,15 @@ const ItemCard = ({
         <img src={item.image} alt={item.name} className="item-image" />
       )}
       <div className="card-details">
-        {/* NAME */}
+        {/* NAME & PRICE*/}
         <div className="name-price">
           <p className="item-price">
-            ${item.price} {item.name}
+            {price > 0 && `$${price}`}
+
+            {!price && minModifierPrice && `From $${minModifierPrice}`}
           </p>
+
+          <p className="item-name">{item.name}</p>
         </div>
         {/* DESCRIPTION */}
         {item.description && (
@@ -85,31 +139,29 @@ const ItemCard = ({
         >
           {item.available ? "Available" : "Not Available"}
         </p>
-        {/* VISIBILITY */}
-        {item.visible !== undefined && (
-          <p className="visibility">
-            {item.visible ? "Visible to Customers" : "Hidden from Customers"}
-          </p>
-        )}
+
         {/* MODIFIERS */}
-        {item.modifiers && item.modifiers.length > 0 && (
+        {modifiers.length > 0 && (
           <div className="modifiers-section">
             <p className="modifiers">Modifiers:</p>
+
             <ul className="modifiers-list">
-              {item.modifiers.map((mod, index) => (
+              {modifiers.map((mod, index) => (
                 <li key={index}>
-                  {mod.name} - ${mod.price}
+                  {mod.name}
+                  {mod.price && ` - $${mod.price}`}
                 </li>
               ))}
             </ul>
           </div>
         )}
         {/* CUSTOM PROPERTIES */}
-        {item.customProperties?.length > 0 && (
+        {properties.length > 0 && (
           <div className="custom-properties-section">
             <p className="property">Custom Properties:</p>
+
             <ul className="property-list">
-              {item.customProperties.map((prop, index) => (
+              {properties.map((prop, index) => (
                 <li key={index}>
                   {prop.key}: {prop.value}
                 </li>

@@ -45,6 +45,10 @@ const ItemForm = ({
 
         {/* PRICE */}
         <input
+          type="number"
+          inputMode="decimal"
+          min="0"
+          step="0.01"
           value={dishDraft.price}
           onChange={(e) =>
             setDishDraft((d) => ({ ...d, price: e.target.value }))

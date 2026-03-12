@@ -43,7 +43,7 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      <button className="back-btn" onClick={() => navigate(-1)}>
+      <button className="btn back-btn" onClick={() => navigate("/")}>
         ← Back
       </button>
       <h2>Login</h2>
