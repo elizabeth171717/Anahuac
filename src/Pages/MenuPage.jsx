@@ -1,4 +1,11 @@
 import { useEffect, useState } from "react";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  arrayMove,
+} from "@dnd-kit/sortable";
 import { Plus } from "lucide-react";
 import axios from "axios";
 import SectionForm from "../Components/menu/SectionForm";
@@ -81,7 +88,7 @@ const MenuPage = () => {
         }
       } else {
         // CREATE MODE
-        menu.sections.push({
+        menu.sections.unshift({
           id: crypto.randomUUID(),
           section: draftSectionName,
           items: [],
@@ -95,6 +102,23 @@ const MenuPage = () => {
     setDraftSectionName("");
     setEditingSectionId(null);
     setShowSectionForm(false);
+  };
+
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+
+    if (!over || active.id === over.id) return;
+
+    setMenu((prev) => {
+      const menu = structuredClone(prev);
+
+      const oldIndex = menu.sections.findIndex((s) => s.id === active.id);
+      const newIndex = menu.sections.findIndex((s) => s.id === over.id);
+
+      menu.sections = arrayMove(menu.sections, oldIndex, newIndex);
+
+      return menu;
+    });
   };
 
   return (
@@ -116,18 +140,28 @@ const MenuPage = () => {
         </button>
 
         {/* SECTIONS */}
-        {menu.sections?.map((section) => (
-          <Section
-            key={section.id}
-            section={section}
-            setMenu={setMenu}
-            onEditSection={(section) => {
-              setDraftSectionName(section.section);
-              setEditingSectionId(section.id);
-              setShowSectionForm(true);
-            }}
-          />
-        ))}
+        <DndContext
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext
+            items={menu.sections.map((s) => s.id)}
+            strategy={verticalListSortingStrategy}
+          >
+            {menu.sections?.map((section) => (
+              <Section
+                key={section.id}
+                section={section}
+                setMenu={setMenu}
+                onEditSection={(section) => {
+                  setDraftSectionName(section.section);
+                  setEditingSectionId(section.id);
+                  setShowSectionForm(true);
+                }}
+              />
+            ))}
+          </SortableContext>
+        </DndContext>
       </div>
 
       {/* ⭐ SECTION CREATION MODAL ⭐ */}

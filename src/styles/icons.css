@@ -3,7 +3,14 @@
 ========================================= */
 
 .icon{
-
+color: aquamarine;
   cursor: pointer;
+  width: 20px;
+}
+@media (min-width:45rem) {
+ .icon{
+
+  width: 34px;
+}
 }
 

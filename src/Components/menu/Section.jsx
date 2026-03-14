@@ -5,6 +5,7 @@ import {
   Pencil,
   ChevronDown,
   ChevronRight,
+  GripVertical,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -13,6 +14,8 @@ import ItemCard from "./ItemCard";
 import ItemForm from "./ItemForm";
 import GroupForm from "./GroupForm";
 import "./Modal.css";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 const Section = ({ section, setMenu, onEditSection }) => {
   const safeGroups = section.groups || [];
@@ -23,7 +26,13 @@ const Section = ({ section, setMenu, onEditSection }) => {
   const [groupDraftName, setGroupDraftName] = useState("");
 
   const [showDishForm, setShowDishForm] = useState(false);
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: section.id });
 
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
   // ✅ EXACT SAME STATE STRUCTURE AS GROUP
   const [dishDraft, setDishDraft] = useState({
     name: "",
@@ -147,7 +156,7 @@ const Section = ({ section, setMenu, onEditSection }) => {
           ...cleanedDish,
         };
 
-        sectionToUpdate.items.push(newDish);
+        sectionToUpdate.items.unshift(newDish);
       }
 
       return menu;
@@ -184,7 +193,7 @@ const Section = ({ section, setMenu, onEditSection }) => {
       } else {
         if (!s.groups) s.groups = [];
 
-        s.groups.push({
+        s.groups.unshift({
           id: crypto.randomUUID(),
           groupName: groupDraftName,
           items: [],
@@ -200,9 +209,12 @@ const Section = ({ section, setMenu, onEditSection }) => {
   };
 
   return (
-    <div className="menu-section">
+    <div ref={setNodeRef} style={style} className="menu-section">
       <div className="section-tittle-wrapper">
         <div className="title-container">
+          <span className="drag-handle" {...attributes} {...listeners}>
+            <GripVertical className="icon drag-icon" />
+          </span>
           <h2>{section.section}</h2>
         </div>
 

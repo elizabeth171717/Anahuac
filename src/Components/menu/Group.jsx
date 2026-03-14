@@ -131,7 +131,7 @@ const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
           ...cleanedDish,
         };
 
-        groupToUpdate.items.push(newDish);
+        groupToUpdate.items.unshift(newDish);
       }
 
       return menu;
