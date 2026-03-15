@@ -18,7 +18,8 @@ const client = import.meta.env.VITE_CLIENT;
 const MenuPage = () => {
   const [menu, setMenu] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const [originalMenu, setOriginalMenu] = useState(null);
+  const [hasChanges, setHasChanges] = useState(false);
   // ⭐ MODAL STATE
   const [showSectionForm, setShowSectionForm] = useState(false);
   const [draftSectionName, setDraftSectionName] = useState("");
@@ -34,6 +35,7 @@ const MenuPage = () => {
         });
 
         setMenu(res.data);
+        setOriginalMenu(structuredClone(res.data));
       } catch (err) {
         console.error("❌ Failed to load menu", err);
       } finally {
@@ -43,6 +45,13 @@ const MenuPage = () => {
 
     fetchMenu();
   }, []);
+
+  useEffect(() => {
+    if (!menu || !originalMenu) return;
+
+    const changed = JSON.stringify(menu) !== JSON.stringify(originalMenu);
+    setHasChanges(changed);
+  }, [menu, originalMenu]);
 
   if (loading) return <p>Loading menu...</p>;
   if (!menu) return <p>No menu found</p>;
@@ -55,7 +64,7 @@ const MenuPage = () => {
       await axios.put(`${BACKEND_URL}/api/${client}/menu`, menu, {
         headers: { Authorization: `Bearer ${token}` },
       });
-
+      setOriginalMenu(structuredClone(menu));
       console.log("✅ MENU SAVED");
     } catch (err) {
       console.error("❌ SAVE ERROR:", err.response?.data || err.message);
@@ -135,10 +144,16 @@ const MenuPage = () => {
           </button>
         </div>
         {/* MASTER SAVE MENU BUTTON */}
-        <button type="button" className=" btn save-menu-btn" onClick={saveMenu}>
-          Save Menu
-        </button>
 
+        {hasChanges && (
+          <button
+            type="button"
+            className="btn save-menu-btn"
+            onClick={saveMenu}
+          >
+            Save Menu
+          </button>
+        )}
         {/* SECTIONS */}
         <DndContext
           collisionDetection={closestCenter}
