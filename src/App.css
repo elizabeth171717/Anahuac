@@ -133,7 +133,7 @@ margin: 2rem 0;
 .section-tittle-wrapper{
   display: flex;
   align-items: center;
-  gap:1rem;
+  gap:1.25rem;
    background-color: #166534;
    padding: .50rem ;
    flex-wrap: wrap;
@@ -142,7 +142,7 @@ margin: 2rem 0;
 .title-container{
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
 font-weight: bold;
 text-transform: uppercase;
 font-size: larger;
@@ -150,7 +150,7 @@ font-size: larger;
 
 .icons{
 display: flex;
-gap: 1rem;
+gap: 1.25rem;
 }
 
 

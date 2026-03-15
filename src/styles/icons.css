@@ -14,3 +14,18 @@ color: aquamarine;
 }
 }
 
+.drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+          /* BIGGER touch area */
+ 
+
+  cursor: grab;
+  touch-action: none;   /* important for mobile dragging */
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
