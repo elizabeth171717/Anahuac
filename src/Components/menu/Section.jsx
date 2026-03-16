@@ -239,7 +239,7 @@ const Section = ({ section, setMenu, onEditSection }) => {
         <div className="btns-container">
           <div className="add-dish">
             <button className="btn" onClick={handleAddDish}>
-              <Plus className="icon add-icon" /> Dish
+              <Plus className="icon add-icon" /> Item
             </button>
           </div>
 
