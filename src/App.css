@@ -72,7 +72,9 @@ body {
   padding: 1rem .50rem;
 }
 
-
+.menu-container{
+  background-color: #afafaf;
+}
 /* =========================================
   RESTAURANT NAME/EDITOR
 ========================================= */
@@ -129,13 +131,14 @@ justify-content: center;
 ========================================= */
 .menu-section {
 margin: 2rem 0;
+background-color: black;
 }
 
 .section-tittle-wrapper{
   display: flex;
   align-items: center;
   gap:1.25rem;
- 
+  background-color: rgb(0, 255, 255);
    padding: .50rem ;
    flex-wrap: wrap;
 }
@@ -172,8 +175,8 @@ gap: 1.25rem;
 
 
 .menu-group {
-  margin: 2rem 0;
-
+  margin: 2rem .50rem;
+ background-color: rgb(216, 253, 253);
 }
 
 

@@ -67,7 +67,7 @@ display: flex;
 
 .avialability{
  position: absolute;
-  top: 47%;
+  bottom: .75rem;
   right: .50rem;
   cursor: pointer;
     z-index: 10; /* ensures icons stay above image */

@@ -1,9 +1,9 @@
 /* BASE BUTTON */
 
 .btn {
-  padding: 12px ;
+  padding: 6px ;
   border-radius: 14px;
-  background-color: #7a7d81;
+  background-color: #c6c8ca;
   border: none;
   cursor: pointer;
   display: flex;
@@ -79,7 +79,7 @@
   z-index: 1000;
   width: 90%;
   max-width: 400px;
-  background-color: aqua;
+  background-color: rgb(0, 255, 255);
   color: black;
  font-weight: bold;
 }
