@@ -8,7 +8,7 @@
   padding: 0;
 }
 body {
-  background: #caffb6;  /* slightly darker than current */
+ 
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     overflow-x: hidden;
 }
@@ -24,6 +24,7 @@ body {
   justify-content: center;
   height: 100vh;
   gap: 1rem;
+  margin: 1rem;
 }
 
       .landing-card {
@@ -79,11 +80,11 @@ body {
 .menu-name-container{
   display: flex;
   align-items: center;
- padding: 1rem .50rem;
+ padding: .50rem;
   gap: 1rem;
  text-align: center;
 justify-content: center;
- 
+
   flex-wrap: wrap;
  
 }
@@ -134,7 +135,7 @@ margin: 2rem 0;
   display: flex;
   align-items: center;
   gap:1.25rem;
-   background-color: #6e234f;
+ 
    padding: .50rem ;
    flex-wrap: wrap;
 }
@@ -173,8 +174,6 @@ gap: 1.25rem;
 .menu-group {
   margin: 2rem 0;
 
-
-  background: #fceb02;
 }
 
 

@@ -3,7 +3,7 @@
 .btn {
   padding: 12px ;
   border-radius: 14px;
-  
+  background-color: #7a7d81;
   border: none;
   cursor: pointer;
   display: flex;

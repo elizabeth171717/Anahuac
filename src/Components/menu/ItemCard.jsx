@@ -78,6 +78,31 @@ const ItemCard = ({
     });
   };
 
+  const toggleAvailability = () => {
+  setMenu((prev) => {
+    const menu = structuredClone(prev);
+    const section = menu.sections.find((s) => s.id === sectionId);
+    if (!section) return prev;
+
+    let itemToUpdate;
+
+    if (groupId) {
+      const group = section.groups.find((g) => g.id === groupId);
+      if (!group) return prev;
+
+      itemToUpdate = group.items.find((i) => i.id === item.id);
+    } else {
+      itemToUpdate = section.items.find((i) => i.id === item.id);
+    }
+
+    if (!itemToUpdate) return prev;
+
+    itemToUpdate.available = !itemToUpdate.available;
+
+    return menu;
+  });
+};
+
   const price = Number(item.price);
 
   const modifiers = item.modifiers?.filter((m) => m.name || m.price) || [];
@@ -96,10 +121,7 @@ const ItemCard = ({
     <div className="menu-item-card">
       {/* ACTIONS */}
       <div className="icons-container">
-        <Pencil
-          className="icon edit-icon"
-          onClick={() => openEditDish(sectionId, groupId, item.id)}
-        />
+       
         <Copy className="icon duplicate-icon" onClick={handleDuplicate} />
 
         {/* VISIBILITY TOGGLE */}
@@ -113,6 +135,10 @@ const ItemCard = ({
         )}
 
         <Trash2 className="icon trash-icon" onClick={handleDelete} />
+         <Pencil
+          className="icon edit-icon"
+          onClick={() => openEditDish(sectionId, groupId, item.id)}
+        />
       </div>
       {/* IMAGE */}
       {item.image && (
@@ -134,8 +160,8 @@ const ItemCard = ({
           <p className="item-description">{item.description}</p>
         )}
         {/* AVAILABILITY */}
-        <p
-          className={`text-sm ${item.available ? "text-green-600" : "text-red-500"}`}
+        <p onClick={toggleAvailability}
+          className={`avialability ${item.available ? "text-green-600" : "text-red-500"}`}
         >
           {item.available ? "Available" : "Not Available"}
         </p>
