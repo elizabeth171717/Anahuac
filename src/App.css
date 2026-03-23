@@ -73,7 +73,7 @@ body {
 }
 
 .menu-container{
-  background-color: #afafaf;
+  background-color: #faf8f8;
 }
 /* =========================================
   RESTAURANT NAME/EDITOR
@@ -176,7 +176,7 @@ gap: 1.25rem;
 
 .menu-group {
   margin: 2rem .50rem;
- background-color: rgb(216, 253, 253);
+ background-color: white;
 }
 
 
