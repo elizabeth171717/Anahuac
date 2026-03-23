@@ -138,7 +138,7 @@ const MenuPage = () => {
           <RestaurantNameEditor menu={menu} setMenu={setMenu} />
 
           {/* ADD SECTION BUTTON */}
-          <button className="btn" type="button" onClick={handleAddSection}>
+          <button className="btn btn-primary" type="button" onClick={handleAddSection}>
             <Plus className="icon plus-icon" />
             Section
           </button>

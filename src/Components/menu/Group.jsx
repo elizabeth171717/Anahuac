@@ -173,7 +173,7 @@ const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
           <div className="add-dish">
             <button className="btn" onClick={handleAddDish}>
               <Plus className="icon add-icon" />
-              Dish
+              Item
             </button>
           </div>
         </div>

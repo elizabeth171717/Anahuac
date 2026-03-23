@@ -3,13 +3,13 @@
 .btn {
   padding: 6px ;
   border-radius: 14px;
-  background-color: #c6c8ca;
+  background-color: #d7d8d8;
   border: none;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-
+font-weight: bold;
   transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
 
   /* nice mobile feel */
@@ -26,8 +26,7 @@
 /* PRIMARY */
 
 .btn-primary {
-  background: linear-gradient(135deg, #4f46e5, #6366f1);
-  color: white;
+  background: rgb(0, 255, 255);
 }
 
 /* SECONDARY */

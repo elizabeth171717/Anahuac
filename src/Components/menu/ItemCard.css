@@ -104,7 +104,7 @@ gap: .50rem;}
    DESCRIPTION
 ========================================= */
 .item-description {
-  
+  margin: .50rem 0;
   color: #6b7280;
  
 }
@@ -150,9 +150,7 @@ gap: .50rem;}
 
 .modifiers,
 .property {
-  
- 
-  color: #374151;
+font-weight: bold;
 }
 
 .modifiers-list,
