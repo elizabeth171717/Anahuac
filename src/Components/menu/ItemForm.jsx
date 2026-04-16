@@ -57,7 +57,7 @@ const ItemForm = ({
           className="item-price-input"
         />
 
-        {/* IMAGE */}
+   
         {/* IMAGE */}
         <input
           type="file"
@@ -139,7 +139,22 @@ const ItemForm = ({
           />
           Visible
         </label>
-
+       
+ {/* REMAINING (STOCK) */}
+ <label className="item-label">Remaining</label>
+<input
+  type="number"
+  min="0"
+  value={dishDraft.remaining ?? ""}
+  onChange={(e) =>
+    setDishDraft((d) => ({
+      ...d,
+      remaining: Number(e.target.value),
+    }))
+  }
+  placeholder="Remaining (stock)"
+  className="item-remaining-input"
+/>
         {/* MODIFIERS */}
         <h3>Modifiers</h3>
 
@@ -230,6 +245,47 @@ const ItemForm = ({
         >
           + Add Property
         </button>
+
+{/* TAG SELECTOR */}
+
+{/* TAG SELECTOR */}
+<h3>Tags</h3>
+
+<div className="tags-selector">
+  {[
+    { label: "vegan", icon: "🌱" },
+    { label: "spicy", icon: "🌶️" },
+    { label: "mild", icon: "🟢" },
+    { label: "nuts", icon: "🥜" },
+    { label: "dairy", icon: "🥛" },
+  ].map((tag) => {
+    const tags = dishDraft.tags || []; // ✅ SAFE
+    const isActive = tags.includes(tag.label);
+
+    return (
+      <button
+        key={tag.label}
+        type="button"
+        onClick={() => {
+          setDishDraft((d) => {
+            const currentTags = d.tags || []; // ✅ SAFE
+            const exists = currentTags.includes(tag.label);
+
+            return {
+              ...d,
+              tags: exists
+                ? currentTags.filter((t) => t !== tag.label)
+                : [...currentTags, tag.label],
+            };
+          });
+        }}
+        className={`tag-chip ${isActive ? "active" : ""}`}
+      >
+        <span>{tag.icon}</span> {tag.label}
+      </button>
+    );
+  })}
+</div>
 
         {/* ACTIONS */}
         <div className="action-buttons-container">

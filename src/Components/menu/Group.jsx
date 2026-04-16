@@ -17,6 +17,9 @@ const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
     visible: true,
     modifiers: [],
     customProperties: [],
+    
+     remaining: 0, // ✅ ADD THIS
+        tags: [] // ✅ ADD THIS
   });
 
   const [editingTarget, setEditingTarget] = useState(null);
@@ -68,6 +71,8 @@ const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
       visible: true,
       modifiers: [],
       customProperties: [],
+      remaining: 0, // ✅ ADD THIS
+        tags: [] // ✅ ADD THIS
     });
     setShowDishForm(true);
   };
@@ -146,6 +151,8 @@ const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
       visible: true,
       modifiers: [],
       customProperties: [],
+      remaining: 0, // ✅ ADD THIS
+        tags: [] // ✅ ADD THIS
     });
 
     setEditingTarget(null);

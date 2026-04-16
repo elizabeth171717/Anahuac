@@ -43,6 +43,9 @@ const Section = ({ section, setMenu, onEditSection }) => {
     visible: true,
     modifiers: [],
     customProperties: [],
+   
+     remaining: 0, // ✅ ADD THIS
+        tags: [] // ✅ ADD THIS
   });
 
   const [editingTarget, setEditingTarget] = useState(null);
@@ -96,6 +99,9 @@ const Section = ({ section, setMenu, onEditSection }) => {
       visible: true,
       modifiers: [],
       customProperties: [],
+     
+       remaining: 0, // ✅ ADD THIS
+        tags: [] // ✅ ADD THIS
     });
     setShowDishForm(true);
   };
@@ -171,6 +177,8 @@ const Section = ({ section, setMenu, onEditSection }) => {
       visible: true,
       modifiers: [],
       customProperties: [],
+       remaining: 0, // ✅ ADD THIS
+        tags: [] // ✅ ADD THIS
     });
 
     setEditingTarget(null);

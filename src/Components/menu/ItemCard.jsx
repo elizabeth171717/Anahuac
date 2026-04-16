@@ -165,6 +165,18 @@ const ItemCard = ({
         >
           {item.available ? "Available" : "Not Available"}
         </p>
+{/* 🔥 STOCK DISPLAY */}
+{item.remaining === 0 && (
+  <p className="text-red-500 font-bold">
+    ❌ Sold Out
+  </p>
+)}
+
+{item.remaining > 0 && item.remaining <= 5 && (
+  <p className="text-orange-500 font-bold">
+    ⚠️ Only {item.remaining} left
+  </p>
+)}
 
         {/* MODIFIERS */}
         {modifiers.length > 0 && (
@@ -195,6 +207,31 @@ const ItemCard = ({
             </ul>
           </div>
         )}
+
+        {/* TAGS */}
+{(() => {
+  const tags = item.tags || []; // ✅ SAFE
+
+  if (tags.length === 0) return null;
+
+  const tagMap = {
+    vegan: "🌱",
+    spicy: "🌶️",
+    mild: "🟢",
+    nuts: "🥜",
+    dairy: "🥛",
+  };
+
+  return (
+    <div className="item-tags">
+      {tags.map((tag) =>
+        tagMap[tag] ? (
+          <span key={tag}>{tagMap[tag]}</span>
+        ) : null
+      )}
+    </div>
+  );
+})()}
       </div>
     </div>
   );
