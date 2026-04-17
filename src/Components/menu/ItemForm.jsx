@@ -140,21 +140,23 @@ const ItemForm = ({
           Visible
         </label>
        
- {/* REMAINING (STOCK) */}
- <label className="item-label">Remaining</label>
+<label className="item-label">Remaining</label>
 <input
   type="number"
   min="0"
   value={dishDraft.remaining ?? ""}
-  onChange={(e) =>
+  onChange={(e) => {
+    const value = e.target.value;
+
     setDishDraft((d) => ({
       ...d,
-      remaining: Number(e.target.value),
-    }))
-  }
+      remaining: value === "" ? null : Number(value),
+    }));
+  }}
   placeholder="Remaining (stock)"
   className="item-remaining-input"
 />
+
         {/* MODIFIERS */}
         <h3>Modifiers</h3>
 

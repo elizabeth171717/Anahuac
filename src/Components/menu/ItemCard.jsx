@@ -171,19 +171,16 @@ const ItemCard = ({
         </p>
 {/* 🔥 REMAINIG DISPLAY */}
 
-
 {isTracked && (
   item.remaining === 0 ? (
     <p>❌ Sold Out</p>
+  ) : item.remaining <= 5 ? (
+    <p className="text-orange-500 font-bold">
+      ⚠️ Only {item.remaining} left
+    </p>
   ) : (
     <p>{item.remaining} left</p>
   )
-)}
-
-{item.remaining > 0 && item.remaining <= 5 && (
-  <p className="text-orange-500 font-bold">
-    ⚠️ Only {item.remaining} left
-  </p>
 )}
 
         {/* MODIFIERS */}
