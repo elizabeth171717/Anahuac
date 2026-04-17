@@ -8,6 +8,10 @@ const ItemCard = ({
   setMenu,
   openEditDish,
 }) => {
+ // 👇 ADD IT HERE
+  const isTracked =
+    item.remaining !== null && item.remaining !== undefined;
+
   // DELETE
   const handleDelete = () => {
     setMenu((prev) => {
@@ -165,11 +169,15 @@ const ItemCard = ({
         >
           {item.available ? "Available" : "Not Available"}
         </p>
-{/* 🔥 STOCK DISPLAY */}
-{item.remaining === 0 && (
-  <p className="text-red-500 font-bold">
-    ❌ Sold Out
-  </p>
+{/* 🔥 REMAINIG DISPLAY */}
+
+
+{isTracked && (
+  item.remaining === 0 ? (
+    <p>❌ Sold Out</p>
+  ) : (
+    <p>{item.remaining} left</p>
+  )
 )}
 
 {item.remaining > 0 && item.remaining <= 5 && (

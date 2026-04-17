@@ -43,8 +43,7 @@ const Section = ({ section, setMenu, onEditSection }) => {
     visible: true,
     modifiers: [],
     customProperties: [],
-   
-     remaining: 0, // ✅ ADD THIS
+   remaining: null, // ✅ ADD THIS
         tags: [] // ✅ ADD THIS
   });
 
@@ -100,7 +99,7 @@ const Section = ({ section, setMenu, onEditSection }) => {
       modifiers: [],
       customProperties: [],
      
-       remaining: 0, // ✅ ADD THIS
+       remaining: null, // ✅ ADD THIS
         tags: [] // ✅ ADD THIS
     });
     setShowDishForm(true);
@@ -177,7 +176,7 @@ const Section = ({ section, setMenu, onEditSection }) => {
       visible: true,
       modifiers: [],
       customProperties: [],
-       remaining: 0, // ✅ ADD THIS
+       remaining: null, // ✅ ADD THIS
         tags: [] // ✅ ADD THIS
     });
 

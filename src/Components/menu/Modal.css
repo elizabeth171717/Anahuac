@@ -127,3 +127,26 @@
 .save-btn:active {
   transform: scale(0.96);
 }
+
+.item-tags {
+  display: flex;
+  gap: .50rem;
+  margin-top: 6px;
+  font-size: 16px;
+}
+
+.tag-chip {
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background: white;
+margin:.25rem;
+  
+}
+
+.tag-chip.active {
+  background: #6e234f;
+  color: white;
+  border-color: #6e234f;
+}

@@ -18,7 +18,7 @@ const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
     modifiers: [],
     customProperties: [],
     
-     remaining: 0, // ✅ ADD THIS
+     remaining: null, // ✅ ADD THIS
         tags: [] // ✅ ADD THIS
   });
 
@@ -71,7 +71,7 @@ const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
       visible: true,
       modifiers: [],
       customProperties: [],
-      remaining: 0, // ✅ ADD THIS
+      remaining: null, // ✅ ADD THIS
         tags: [] // ✅ ADD THIS
     });
     setShowDishForm(true);
@@ -151,7 +151,7 @@ const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
       visible: true,
       modifiers: [],
       customProperties: [],
-      remaining: 0, // ✅ ADD THIS
+      remaining: null, // ✅ ADD THIS
         tags: [] // ✅ ADD THIS
     });
 
