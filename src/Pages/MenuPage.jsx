@@ -148,7 +148,20 @@ const MenuPage = () => {
   📷 
 </button>
 
-{showScanner && <ScanMenu />}
+
+{showScanner && (
+  <ScanMenu
+    onClose={() => setShowScanner(false)}
+    onApply={(data) => {
+      setMenu((prev) => ({
+        ...prev,
+        sections: data.sections,
+      }));
+      setShowScanner(false); // close after applying
+    }}
+  />
+)}
+
 
           {/* ADD SECTION BUTTON */}
           <button className="btn btn-primary" type="button" onClick={handleAddSection}>
