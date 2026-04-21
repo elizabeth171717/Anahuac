@@ -1,0 +1,70 @@
+{
+  "landing": {
+    "welcome": "Welcome to Universal Menu",
+    "subtitle": "Manage your restaurant menu from one place.",
+    "login": "Login",
+    "createAccount": "Create Account"
+  },
+  
+  "login": {
+    "back": "Back",
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Login"
+  },
+  "signup": {
+    "back": "Back",
+    "title": "Create Your Account",
+    "name": "Your Name",
+    "restaurantName": "Restaurant Name",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Create Account"
+  },
+   "account": {
+    "title": "Edit Account",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "restaurant": "Restaurant",
+    "loading": "Loading account info..."
+  },
+  "menuEditor": {
+    "addSection": "Section",
+    "saveMenu": "Save Menu"
+  },
+   "section": {
+    "addItem": "Item",
+    "addGroup": "Group"
+  },
+  "group": {
+    "addItem": "Item"
+  },
+   "itemForm": {
+    "editTitle": "Edit Dish",
+    "addTitle": "Add Dish",
+    "name": "Dish Name",
+    "description": "Description",
+    "price": "Price",
+    "available": "Available",
+    "visible": "Visible",
+    "remainingLabel": "Remaining",
+    "remainingPlaceholder": "Remaining (stock)",
+    "modifiers": "Modifiers",
+    "modifierName": "Name",
+    "modifierPrice": "Price",
+    "addModifier": "Add Modifier",
+    "customProperties": "Custom Properties",
+    "propertyKey": "Key",
+    "propertyValue": "Value",
+    "addProperty": "Add Property",
+    "tags": "Tags",
+    "cancel": "Cancel",
+    "save": "Save",
+    "uploadError": "Failed to upload image",
+    "invalidImage": "Please upload a valid image file.",
+    "imageTooLarge": "Image too large. Max 2MB allowed."
+  }
+}
+

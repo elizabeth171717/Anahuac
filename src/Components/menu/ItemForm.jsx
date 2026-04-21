@@ -1,6 +1,7 @@
 import React from "react";
 import { BACKEND_URL } from "../../constants/constants";
 // Determine the backend URL based on the environment
+import { useTranslation } from "react-i18next";
 
 const client = import.meta.env.VITE_CLIENT;
 console.log("📦 Backend URL:", BACKEND_URL);
@@ -15,12 +16,13 @@ const ItemForm = ({
   onSave,
 }) => {
   if (!show) return null;
-
+const { t } = useTranslation();
   return (
     <div className="modal-overlay">
       <div className="modal-content">
         <h2 className="editing-target-title">
-          {editingTarget ? "Edit Dish" : "Add Dish"}
+         
+            {editingTarget ? t("itemForm.editTitle") : t("itemForm.addTitle")}
         </h2>
 
         {/* NAME */}
@@ -29,7 +31,7 @@ const ItemForm = ({
           onChange={(e) =>
             setDishDraft((d) => ({ ...d, name: e.target.value }))
           }
-          placeholder="Dish Name"
+          placeholder={t("itemForm.name")}
           className="item-name-input"
         />
 
@@ -39,7 +41,7 @@ const ItemForm = ({
           onChange={(e) =>
             setDishDraft((d) => ({ ...d, description: e.target.value }))
           }
-          placeholder="Description"
+          placeholder={t("itemForm.description")}
           className="item-description-input"
         />
 
@@ -53,7 +55,7 @@ const ItemForm = ({
           onChange={(e) =>
             setDishDraft((d) => ({ ...d, price: e.target.value }))
           }
-          placeholder="Price"
+          placeholder={t("itemForm.price")}
           className="item-price-input"
         />
 
@@ -69,14 +71,14 @@ const ItemForm = ({
 
             // Validate type
             if (!file.type.startsWith("image/")) {
-              alert("Please upload a valid image file.");
+              alert(t("itemForm.invalidImage"));
               return;
             }
 
             // Validate size (2MB)
             const maxSize = 2 * 1024 * 1024;
             if (file.size > maxSize) {
-              alert("Image too large. Max 2MB allowed.");
+              alert(t("itemForm.imageTooLarge"));
               return;
             }
 
@@ -105,7 +107,7 @@ const ItemForm = ({
               }));
             } catch (error) {
               console.error("Upload error:", error);
-              alert("Failed to upload image");
+              alert(t("itemForm.uploadError"));
             }
           }}
         />
@@ -122,7 +124,7 @@ const ItemForm = ({
               }))
             }
           />
-          Available
+          {t("itemForm.available")}
         </label>
 
         {/* VISIBLE */}
@@ -137,10 +139,10 @@ const ItemForm = ({
               }))
             }
           />
-          Visible
+         {t("itemForm.visible")}
         </label>
        
-<label className="item-label">Remaining</label>
+<label className="item-label">{t("itemForm.remainingLabel")}</label>
 <input
   type="number"
   min="0"
@@ -153,17 +155,17 @@ const ItemForm = ({
       remaining: value === "" ? null : Number(value),
     }));
   }}
-  placeholder="Remaining (stock)"
+  placeholder={t("itemForm.remainingPlaceholder")}
   className="item-remaining-input"
 />
 
         {/* MODIFIERS */}
-        <h3>Modifiers</h3>
+        <h3>{t("itemForm.modifiers")}</h3>
 
         {dishDraft.modifiers.map((mod, i) => (
           <div key={i} className="item-modifier-row">
             <input
-              placeholder="Name"
+              placeholder={t("itemForm.modifierName")}
               value={mod.name}
               onChange={(e) => {
                 const copy = [...dishDraft.modifiers];
@@ -174,7 +176,7 @@ const ItemForm = ({
             />
 
             <input
-              placeholder="Price"
+              placeholder={t("itemForm.modifierPrice")}
               value={mod.price}
               onChange={(e) => {
                 const copy = [...dishDraft.modifiers];
@@ -198,16 +200,16 @@ const ItemForm = ({
           }
           className="modifier-add-btn"
         >
-          + Add Modifier
+        {t("itemForm.addModifier")}
         </button>
 
         {/* CUSTOM PROPERTIES */}
-        <h3>Custom Properties</h3>
+        <h3>{t("itemForm.customProperties")}</h3>
 
         {dishDraft.customProperties.map((prop, i) => (
           <div key={i} className="costume-property-row">
             <input
-              placeholder="Key"
+              placeholder={t("itemForm.propertyKey")}
               value={prop.key}
               onChange={(e) => {
                 const copy = [...dishDraft.customProperties];
@@ -221,7 +223,7 @@ const ItemForm = ({
             />
 
             <input
-              placeholder="Value"
+              placeholder={t("itemForm.propertyValue")}
               value={prop.value}
               onChange={(e) => {
                 const copy = [...dishDraft.customProperties];
@@ -245,13 +247,13 @@ const ItemForm = ({
           }
           className="custom-property-add-btn"
         >
-          + Add Property
+        {t("itemForm.addProperty")}
         </button>
 
-{/* TAG SELECTOR */}
+
 
 {/* TAG SELECTOR */}
-<h3>Tags</h3>
+<h3>{t("itemForm.tags")}</h3>
 
 <div className="tags-selector">
   {[
@@ -292,11 +294,11 @@ const ItemForm = ({
         {/* ACTIONS */}
         <div className="action-buttons-container">
           <button onClick={onClose} className="cancel-btn">
-            Cancel
+            {t("itemForm.cancel")}
           </button>
 
           <button onClick={onSave} className="save-btn">
-            Save
+            {t("itemForm.save")}
           </button>
         </div>
       </div>

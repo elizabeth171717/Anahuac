@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/constants";
-
+import { useTranslation } from "react-i18next";
 const client = import.meta.env.VITE_CLIENT;
 
 export default function SignupPage() {
@@ -11,7 +11,7 @@ export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
+const { t } = useTranslation();
   const navigate = useNavigate();
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -40,14 +40,15 @@ export default function SignupPage() {
   return (
     <div className="signup-container">
       <button className="btn back-btn" onClick={() => navigate("/")}>
-        ← Back
+        
+          ← {t("signup.back")}
       </button>
-      <h2>Create Your Account</h2>
+      <h2>{t("signup.title")}</h2>
 
       <form className="signup-box" onSubmit={handleSignup}>
         <input
           type="text"
-          placeholder="Your Name"
+          placeholder={t("signup.name")}
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
@@ -55,7 +56,7 @@ export default function SignupPage() {
 
         <input
           type="text"
-          placeholder="Restaurant Name"
+          placeholder={t("signup.restaurantName")}
           value={restaurantName}
           onChange={(e) => setRestaurantName(e.target.value)}
           required
@@ -63,7 +64,7 @@ export default function SignupPage() {
 
         <input
           type="email"
-          placeholder="Email"
+          placeholder={t("signup.email")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -72,7 +73,7 @@ export default function SignupPage() {
         <div className="pw-input">
           <input
             type={showPassword ? "text" : "password"}
-            placeholder="Password"
+            placeholder={t("signup.password")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -87,7 +88,8 @@ export default function SignupPage() {
           </span>
         </div>
         <button type="submit" className="btn">
-          Create Account
+       
+            {t("signup.submit")}
         </button>
       </form>
     </div>

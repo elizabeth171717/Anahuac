@@ -1,6 +1,7 @@
 // Login.jsx
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/constants";
 // Determine the backend URL based on the environment
@@ -14,7 +15,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-
+const { t } = useTranslation();
   const handleLogin = async (e) => {
     e.preventDefault(); // 🚨 stop page reload
     try {
@@ -44,14 +45,16 @@ export default function Login() {
   return (
     <div className="login-container">
       <button className="btn back-btn" onClick={() => navigate("/")}>
-        ← Back
+      
+         ← {t("login.back")}
       </button>
-      <h2>Login</h2>
+      <h2>{t("login.title")}</h2>
+      
       <form className="login-box" onSubmit={handleLogin}>
         <input
           type="email"
           autoComplete="email"
-          placeholder="Email"
+          placeholder={t("login.email")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -63,7 +66,7 @@ export default function Login() {
             value={password}
             autoComplete="current-password"
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
+            placeholder={t("login.password")}
             required
           />
 
@@ -77,7 +80,7 @@ export default function Login() {
         </div>
 
         <button type="submit" className="btn">
-          Login
+           {t("login.submit")}
         </button>
       </form>
     </div>

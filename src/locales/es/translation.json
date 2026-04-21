@@ -1,0 +1,69 @@
+{
+  "landing": {
+    "welcome": "Bienvenido a Universal Menu",
+    "subtitle": "Administra el menú de tu restaurante desde un solo lugar.",
+    "login": "Iniciar sesión",
+    "createAccount": "Crear cuenta"
+  },
+   "login": {
+    "back": "Regresar",
+    "title": "Iniciar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Iniciar sesión"
+  },
+   "signup": {
+    "back": "Regresar",
+    "title": "Crea tu cuenta",
+    "name": "Tu nombre",
+    "restaurantName": "Nombre del restaurante",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Crear cuenta"
+  },
+   "account": {
+    "title": "Editar cuenta",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "restaurant": "Restaurante",
+    "loading": "Cargando información de la cuenta..."
+  },
+  "menuEditor": {
+    "addSection": "Sección",
+    "saveMenu": "Guardar menú"
+  },
+  "section": {
+    "addItem": "Artículo",
+    "addGroup": "Grupo"
+  },
+  "group": {
+    "addItem": "Artículo"
+  },
+
+  "itemForm": {
+    "editTitle": "Editar platillo",
+    "addTitle": "Agregar platillo",
+    "name": "Nombre del platillo",
+    "description": "Descripción",
+    "price": "Precio",
+    "available": "Disponible",
+    "visible": "Visible",
+    "remainingLabel": "Restante",
+    "remainingPlaceholder": "Restante (inventario)",
+    "modifiers": "Modificadores",
+    "modifierName": "Nombre",
+    "modifierPrice": "Precio",
+    "addModifier": "Agregar modificador",
+    "customProperties": "Propiedades personalizadas",
+    "propertyKey": "Clave",
+    "propertyValue": "Valor",
+    "addProperty": "Agregar propiedad",
+    "tags": "Etiquetas",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "uploadError": "Error al subir la imagen",
+    "invalidImage": "Sube un archivo de imagen válido.",
+    "imageTooLarge": "Imagen demasiado grande. Máximo 2MB."
+  }
+}

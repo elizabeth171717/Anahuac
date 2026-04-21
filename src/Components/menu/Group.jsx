@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Trash2, Copy, Plus, Pencil } from "lucide-react";
 import ItemCard from "./ItemCard";
 import ItemForm from "./ItemForm";
-
+import { useTranslation } from "react-i18next";
 const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
   const safeItems = group.items || [];
-
+const { t } = useTranslation();
   const [showDishForm, setShowDishForm] = useState(false);
 
   const [dishDraft, setDishDraft] = useState({
@@ -180,7 +180,7 @@ const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
           <div className="add-dish">
             <button className="btn" onClick={handleAddDish}>
               <Plus className="icon add-icon" />
-              Item
+              {t("group.addItem")}
             </button>
           </div>
         </div>

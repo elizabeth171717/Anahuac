@@ -8,7 +8,7 @@ import {
   GripVertical,
 } from "lucide-react";
 import { useState } from "react";
-
+import { useTranslation } from "react-i18next";
 import Group from "./Group";
 import ItemCard from "./ItemCard";
 import ItemForm from "./ItemForm";
@@ -24,7 +24,7 @@ const Section = ({ section, setMenu, onEditSection }) => {
   const [editingGroupId, setEditingGroupId] = useState(null);
   const [showGroupForm, setShowGroupForm] = useState(false);
   const [groupDraftName, setGroupDraftName] = useState("");
-
+const { t } = useTranslation();
   const [showDishForm, setShowDishForm] = useState(false);
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: section.id });
@@ -246,7 +246,7 @@ const Section = ({ section, setMenu, onEditSection }) => {
         <div className="btns-container">
           <div className="add-dish">
             <button className="btn" onClick={handleAddDish}>
-              <Plus className="icon add-icon" /> Item
+              <Plus className="icon add-icon" /> {t("section.addItem")}
             </button>
           </div>
 
@@ -259,7 +259,7 @@ const Section = ({ section, setMenu, onEditSection }) => {
                 setShowGroupForm(true);
               }}
             >
-              <Plus className="icon add-icon" /> Group
+              <Plus className="icon add-icon" /> {t("section.addGroup")}
             </button>
           </div>
         </div>

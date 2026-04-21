@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/constants";
 import UserNavbar from "../Components/UserNavbar/UserNavbar";
+import { useTranslation } from "react-i18next";
 const client = import.meta.env.VITE_CLIENT;
 
 /* ================= FIELD ROW COMPONENT ================= */
@@ -55,7 +56,7 @@ export default function EditAccountPage() {
   const [user, setUser] = useState(null);
   const [editingField, setEditingField] = useState(null);
   const [value, setValue] = useState("");
-
+  const { t } = useTranslation(); // ✅ ADD THIS LINE
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -92,12 +93,12 @@ export default function EditAccountPage() {
   return (
     <div className="account-container">
       <UserNavbar />
-      <h2>Current Account</h2>
+      <h2>{t("account.title")}</h2>
 
       {user ? (
         <>
           <FieldRow
-            label="Name"
+            label={t("account.name")}
             field="name"
             user={user}
             editingField={editingField}
@@ -108,7 +109,7 @@ export default function EditAccountPage() {
           />
 
           <FieldRow
-            label="Email"
+            label={t("account.email")}
             field="email"
             type="email"
             user={user}
@@ -120,7 +121,7 @@ export default function EditAccountPage() {
           />
 
           <FieldRow
-            label="Password"
+            label={t("account.password")}
             field="password"
             type="password"
             user={user}
@@ -132,7 +133,7 @@ export default function EditAccountPage() {
           />
 
           <FieldRow
-            label="Restaurant"
+            label={t("account.restaurant")}
             field="restaurantName"
             user={user}
             editingField={editingField}
@@ -143,7 +144,7 @@ export default function EditAccountPage() {
           />
         </>
       ) : (
-        <p>Loading account info...</p>
+        <p>{t("account.loading")}</p>
       )}
     </div>
   );
