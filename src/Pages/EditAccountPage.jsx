@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Pencil } from "lucide-react";
 import { BACKEND_URL } from "../constants/constants";
 import UserNavbar from "../Components/UserNavbar/UserNavbar";
 import { useTranslation } from "react-i18next";
+
 const client = import.meta.env.VITE_CLIENT;
 
 /* ================= FIELD ROW COMPONENT ================= */
@@ -30,20 +32,25 @@ function FieldRow({
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
-          <button onClick={() => handleSave(field)}>Save</button>
-          <button onClick={() => setEditingField(null)}>Cancel</button>
+           <div className="action-buttons-container">
+          <button className="btn save-btn" onClick={() => handleSave(field)}>Save</button>
+          <button className="btn cancel-btn" onClick={() => setEditingField(null)}>Cancel</button>
+          </div>
         </>
       ) : (
         <>
           <span>{field === "password" ? "******" : user?.[field]}</span>
           <button
-            className="icon-btn"
+            className="editAccount-btn"
             onClick={() => {
               setEditingField(field);
               setValue(user?.[field] || "");
             }}
           >
-            ✏️
+            <Pencil
+              className="icon pencil-icon"
+              onClick={() => setEditing(true)}
+            />
           </button>
         </>
       )}
@@ -93,6 +100,7 @@ export default function EditAccountPage() {
   return (
     <div className="account-container">
       <UserNavbar />
+      <div className="edit-account">
       <h2>{t("account.title")}</h2>
 
       {user ? (
@@ -146,6 +154,7 @@ export default function EditAccountPage() {
       ) : (
         <p>{t("account.loading")}</p>
       )}
+      </div>
     </div>
   );
 }

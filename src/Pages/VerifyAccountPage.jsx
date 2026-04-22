@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/constants";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import UserNavbar from "../Components/UserNavbar/UserNavbar";
 const client = import.meta.env.VITE_CLIENT;
 
 export default function VerifyAccountPage() {
@@ -51,7 +51,9 @@ export default function VerifyAccountPage() {
   };
 
   return (
-    <div className="verify-container">
+    <div className="verify-page">
+      <UserNavbar/>
+<div className="verify-container">
       <h2>Verify Your Account</h2>
 
       <p className="verify-email">
@@ -59,9 +61,9 @@ export default function VerifyAccountPage() {
       </p>
 
       {step === "choice" && (
-        <div className="verify-actions">
-          <button onClick={handleRequestCode}>Verify Now</button>
-          <button onClick={handleSkip} className="skip-btn">
+        <div className="action-buttons-container">
+          <button onClick={handleRequestCode} className="btn">Verify Now</button>
+          <button onClick={handleSkip} className="btn skip-btn">
             Skip for Now
           </button>
         </div>
@@ -76,11 +78,12 @@ export default function VerifyAccountPage() {
             onChange={(e) => setCode(e.target.value)}
             required
           />
-          <button type="submit">Confirm Code</button>
+          <button className="btn" type="submit">Confirm Code</button>
         </form>
       )}
 
       {message && <p>{message}</p>}
+      </div>
     </div>
   );
 }

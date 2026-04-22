@@ -38,8 +38,22 @@
     "addItem": "Item",
     "addGroup": "Group"
   },
+  "sectionForm": {
+    "editTitle": "Edit Section",
+    "addTitle": "Add Section",
+    "name": "Section Name",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
   "group": {
     "addItem": "Item"
+  },
+   "groupForm": {
+    "editTitle": "Edit Group",
+    "addTitle": "Add Group",
+    "name": "Group Name",
+    "cancel": "Cancel",
+    "save": "Save"
   },
    "itemForm": {
     "editTitle": "Edit Dish",

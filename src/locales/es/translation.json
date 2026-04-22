@@ -37,8 +37,23 @@
     "addItem": "Artículo",
     "addGroup": "Grupo"
   },
+  "sectionForm": {
+    "editTitle": "Editar sección",
+    "addTitle": "Agregar sección",
+    "name": "Nombre de la sección",
+    "cancel": "Cancelar",
+    "save": "Guardar"
+  },
+
   "group": {
     "addItem": "Artículo"
+  },
+  "groupForm": {
+    "editTitle": "Editar grupo",
+    "addTitle": "Agregar grupo",
+    "name": "Nombre del grupo",
+    "cancel": "Cancelar",
+    "save": "Guardar"
   },
 
   "itemForm": {

@@ -29,3 +29,13 @@
 .drag-handle:active {
   cursor: grabbing;
 }
+
+.collapse-btn, .editAccount-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
