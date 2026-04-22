@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { useTranslation } from "react-i18next";
-import ScanMenu from "../MenuScanner";
+
 import {
   SortableContext,
   verticalListSortingStrategy,
@@ -25,7 +25,7 @@ const MenuPage = () => {
   const [showSectionForm, setShowSectionForm] = useState(false);
   const [draftSectionName, setDraftSectionName] = useState("");
   const [editingSectionId, setEditingSectionId] = useState(null);
-  const [showScanner, setShowScanner] = useState(false);
+
   const { t } = useTranslation();
   // ✅ FETCH MENU
   useEffect(() => {
@@ -140,30 +140,7 @@ const MenuPage = () => {
         <div className="menu-name-container">
           <RestaurantNameEditor menu={menu} setMenu={setMenu} />
  
-  <button
-  type="button"
-  className="btn"
-  onClick={() => setShowScanner((prev) => !prev)}
->
-  📷 
-</button>
-
-
-{showScanner && (
-  <ScanMenu
-    onClose={() => setShowScanner(false)}
-    onApply={(data) => {
-      setMenu((prev) => ({
-        ...prev,
-        sections: data.sections,
-      }));
-      setShowScanner(false); // close after applying
-    }}
-  />
-)}
-
-
-          {/* ADD SECTION BUTTON */}
+ {/* ADD SECTION BUTTON */}
           <button className="btn btn-primary" type="button" onClick={handleAddSection}>
             <Plus className="icon plus-icon" />
            
