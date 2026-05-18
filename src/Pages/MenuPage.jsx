@@ -13,6 +13,7 @@ import SectionForm from "../Components/menu/SectionForm";
 import { BACKEND_URL } from "../constants/constants";
 import Section from "../Components/menu/Section";
 import RestaurantNameEditor from "../Components/menu/RestaurantNameEditor";
+import MenuViewsEditor from "../Components/menu/MenuViewsEditor";
 
 const client = import.meta.env.VITE_CLIENT;
 
@@ -139,7 +140,10 @@ const MenuPage = () => {
         {/* RESTAURANT NAME */}
         <div className="menu-name-container">
           <RestaurantNameEditor menu={menu} setMenu={setMenu} />
- 
+ <MenuViewsEditor
+  menu={menu}
+  setMenu={setMenu}
+/>
  {/* ADD SECTION BUTTON */}
           <button className="btn btn-primary" type="button" onClick={handleAddSection}>
             <Plus className="icon plus-icon" />
@@ -173,11 +177,13 @@ const MenuPage = () => {
                 key={section.id}
                 section={section}
                 setMenu={setMenu}
+                 views={menu.views}
                 onEditSection={(section) => {
                   setDraftSectionName(section.section);
                   setEditingSectionId(section.id);
                   setShowSectionForm(true);
                 }}
+
               />
             ))}
           </SortableContext>

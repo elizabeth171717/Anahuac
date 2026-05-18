@@ -17,7 +17,7 @@ import "./Modal.css";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-const Section = ({ section, setMenu, onEditSection }) => {
+const Section = ({ section, setMenu, onEditSection, views }) => {
   const safeGroups = section.groups || [];
   const safeItems = section.items || [];
   const [collapsed, setCollapsed] = useState(false);
@@ -273,6 +273,7 @@ const { t } = useTranslation();
               sectionId={section.id}
               group={group}
               setMenu={setMenu}
+              views={views}
               onEditGroup={(group) => {
                 setGroupDraftName(group.groupName);
                 setEditingGroupId(group.id);
@@ -289,6 +290,7 @@ const { t } = useTranslation();
                 sectionId={section.id}
                 setMenu={setMenu}
                 openEditDish={() => openEditDish(item.id)}
+                views={views}
               />
             ))}
           </div>
@@ -303,6 +305,7 @@ const { t } = useTranslation();
           editingTarget={editingTarget}
           onClose={() => setShowDishForm(false)}
           onSave={createDish}
+           views={views}
         />
       )}
 

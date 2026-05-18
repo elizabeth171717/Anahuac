@@ -7,12 +7,9 @@ const ItemCard = ({
   groupId = null,
   setMenu,
   openEditDish,
+  views = [],
 }) => {
- // 👇 ADD IT HERE
-  const isTracked =
-    item.remaining !== null && item.remaining !== undefined;
-
-  // DELETE
+   // DELETE
   const handleDelete = () => {
     setMenu((prev) => {
       const menu = structuredClone(prev);
@@ -128,15 +125,6 @@ const ItemCard = ({
        
         <Copy className="icon duplicate-icon" onClick={handleDuplicate} />
 
-        {/* VISIBILITY TOGGLE */}
-        {item.visible ? (
-          <Eye className="icon visibility-icon" onClick={toggleVisibility} />
-        ) : (
-          <EyeOff
-            className="icon visibility-icon hidden-icon"
-            onClick={toggleVisibility}
-          />
-        )}
 
         <Trash2 className="icon trash-icon" onClick={handleDelete} />
          <Pencil
@@ -163,26 +151,38 @@ const ItemCard = ({
         {item.description && (
           <p className="item-description">{item.description}</p>
         )}
-        {/* AVAILABILITY */}
-        <p onClick={toggleAvailability}
-          className={`avialability ${item.available ? "text-green-600" : "text-red-500"}`}
-        >
-          {item.available ? "Available" : "Not Available"}
-        </p>
-{/* 🔥 REMAINIG DISPLAY */}
+        {/* VIEW STATUS */}
+<div className="view-status-container">
+  {views.map((view) => {
+  const settings = item.displaySettings?.[view.id] || {
+  visible: true,
+  available: true,
+  remaining: null,
+};
 
-{isTracked && (
-  item.remaining === 0 ? (
-    <p>❌ Sold Out</p>
-  ) : item.remaining <= 5 ? (
-    <p className="text-orange-500 font-bold">
-      ⚠️ Only {item.remaining} left
-    </p>
-  ) : (
-    <p>{item.remaining} left</p>
-  )
-)}
+    return (
+      <div key={view.id} className="view-status-card">
+        <p className="view-name">{view.name}</p>
 
+        <div className="view-status-info">
+          <span>
+            {settings.visible ? "👁️ Visible" : "🙈 Hidden"}
+          </span>
+
+          <span>
+            {settings.available ? "✅ Available" : "❌ Unavailable"}
+          </span>
+
+          {settings.remaining !== null && (
+            <span>
+              📦 {settings.remaining} left
+            </span>
+          )}
+        </div>
+      </div>
+    );
+  })}
+</div>
         {/* MODIFIERS */}
         {modifiers.length > 0 && (
           <div className="modifiers-section">

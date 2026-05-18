@@ -3,7 +3,7 @@ import { Trash2, Copy, Plus, Pencil } from "lucide-react";
 import ItemCard from "./ItemCard";
 import ItemForm from "./ItemForm";
 import { useTranslation } from "react-i18next";
-const Group = ({ sectionId, group, setMenu, onEditGroup }) => {
+const Group = ({ sectionId, group, setMenu, onEditGroup,  views}) => {
   const safeItems = group.items || [];
 const { t } = useTranslation();
   const [showDishForm, setShowDishForm] = useState(false);
@@ -197,6 +197,7 @@ const { t } = useTranslation();
               groupId={group.id}
               setMenu={setMenu}
               openEditDish={() => openEditDish(item.id)}
+                views={views}
             />
           ))}
         </div>
@@ -210,6 +211,7 @@ const { t } = useTranslation();
           editingTarget={editingTarget}
           onClose={() => setShowDishForm(false)}
           onSave={createDish}
+            views={views}
         />
       )}
     </>

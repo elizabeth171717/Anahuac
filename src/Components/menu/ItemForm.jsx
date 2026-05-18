@@ -14,6 +14,7 @@ const ItemForm = ({
   editingTarget,
   onClose,
   onSave,
+   views = [],
 }) => {
   if (!show) return null;
 const { t } = useTranslation();
@@ -111,16 +112,36 @@ const { t } = useTranslation();
             }
           }}
         />
+{/* VIEW SETTINGS */}
+<h3>{t("itemForm.viewSettings")}</h3>
+
+<div className="view-settings-container">
+  {views.map((view) => {
+    const settings = dishDraft.displaySettings?.[view.id] || {
+      visible: true,
+      available: true,
+      remaining: null,
+    };
+
+    return (
+      <div key={view.id} className="view-setting-card">
+        <h4>{view.name}</h4>
 
         {/* AVAILABLE */}
         <label className="available-checkbox">
           <input
             type="checkbox"
-            checked={dishDraft.available}
+            checked={settings.available}
             onChange={(e) =>
               setDishDraft((d) => ({
                 ...d,
-                available: e.target.checked,
+                displaySettings: {
+                  ...d.displaySettings,
+                  [view.id]: {
+                    ...settings,
+                    available: e.target.checked,
+                  },
+                },
               }))
             }
           />
@@ -131,33 +152,54 @@ const { t } = useTranslation();
         <label className="visible-checkbox">
           <input
             type="checkbox"
-            checked={dishDraft.visible}
+            checked={settings.visible}
             onChange={(e) =>
               setDishDraft((d) => ({
                 ...d,
-                visible: e.target.checked,
+                displaySettings: {
+                  ...d.displaySettings,
+                  [view.id]: {
+                    ...settings,
+                    visible: e.target.checked,
+                  },
+                },
               }))
             }
           />
-         {t("itemForm.visible")}
+          {t("itemForm.visible")}
         </label>
-       
-<label className="item-label">{t("itemForm.remainingLabel")}</label>
-<input
-  type="number"
-  min="0"
-  value={dishDraft.remaining ?? ""}
-  onChange={(e) => {
-    const value = e.target.value;
 
-    setDishDraft((d) => ({
-      ...d,
-      remaining: value === "" ? null : Number(value),
-    }));
-  }}
-  placeholder={t("itemForm.remainingPlaceholder")}
-  className="item-remaining-input"
-/>
+        {/* REMAINING */}
+        <label className="item-label">
+          {t("itemForm.remainingLabel")}
+        </label>
+
+        <input
+          type="number"
+          min="0"
+          value={settings.remaining ?? ""}
+          onChange={(e) => {
+            const value = e.target.value;
+
+            setDishDraft((d) => ({
+              ...d,
+              displaySettings: {
+                ...d.displaySettings,
+                [view.id]: {
+                  ...settings,
+                  remaining:
+                    value === "" ? null : Number(value),
+                },
+              },
+            }));
+          }}
+          placeholder={t("itemForm.remainingPlaceholder")}
+          className="item-remaining-input"
+        />
+      </div>
+    );
+  })}
+</div>
 
         {/* MODIFIERS */}
         <h3>{t("itemForm.modifiers")}</h3>
