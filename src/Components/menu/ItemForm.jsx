@@ -47,18 +47,61 @@ const { t } = useTranslation();
         />
 
         {/* PRICE */}
-        <input
-          type="number"
-          inputMode="decimal"
-          min="0"
-          step="0.01"
-          value={dishDraft.price}
-          onChange={(e) =>
-            setDishDraft((d) => ({ ...d, price: e.target.value }))
-          }
-          placeholder={t("itemForm.price")}
-          className="item-price-input"
-        />
+      <div className="pricing-section">
+  <h3>Pricing</h3>
+
+  {/* BASE PRICE */}
+  <div className="price-row">
+    <label>Base Price</label>
+
+    <input
+      type="number"
+      value={dishDraft.basePrice ?? ""}
+      onChange={(e) => {
+        const value = e.target.value;
+
+        setDishDraft((prev) => ({
+          ...prev,
+          basePrice:
+            value === ""
+              ? null
+              : Number(value),
+        }));
+      }}
+    />
+  </div>
+
+  {/* VIEW-SPECIFIC PRICES */}
+  {views.map((view) => (
+    <div key={view.id} className="price-row">
+      <label>
+        {view.name} Price Override
+      </label>
+
+      <input
+        type="number"
+        value={dishDraft.prices?.[view.id] ?? ""}
+        placeholder="Uses base price"
+        onChange={(e) => {
+          const value = e.target.value;
+
+          setDishDraft((prev) => ({
+            ...prev,
+
+            prices: {
+              ...prev.prices,
+
+              [view.id]:
+                value === ""
+                  ? undefined
+                  : Number(value),
+            },
+          }));
+        }}
+      />
+    </div>
+  ))}
+</div>
 
    
         {/* IMAGE */}

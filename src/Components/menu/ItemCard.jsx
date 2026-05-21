@@ -104,7 +104,12 @@ const ItemCard = ({
   });
 };
 
-  const price = Number(item.price);
+ const basePrice =
+  item.basePrice !== null &&
+  item.basePrice !== undefined
+    ? Number(item.basePrice)
+    : null;
+
 
   const modifiers = item.modifiers?.filter((m) => m.name || m.price) || [];
 
@@ -139,14 +144,45 @@ const ItemCard = ({
       <div className="card-details">
         {/* NAME & PRICE*/}
         <div className="name-price">
-          <p className="item-price">
-            {price > 0 && `$${price}`}
+         <p className="item-price">
 
-            {!price && minModifierPrice && `From $${minModifierPrice}`}
-          </p>
+  {/* BASE PRICE */}
+  {basePrice !== null && (
+    <>${basePrice}</>
+  )}
+
+  {/* MODIFIER-ONLY ITEMS */}
+  {basePrice === null &&
+    minModifierPrice && (
+      <>From ${minModifierPrice}</>
+    )}
+</p>
 
           <p className="item-name">{item.name}</p>
         </div>
+        <div className="view-price-list">
+  {views.map((view) => {
+
+    const overridePrice =
+      item.prices?.[view.id];
+
+    if (
+      overridePrice === undefined ||
+      overridePrice === null
+    ) {
+      return null;
+    }
+
+    return (
+      <p
+        key={view.id}
+        className="view-price"
+      >
+        {view.name}: ${overridePrice}
+      </p>
+    );
+  })}
+</div>
         {/* DESCRIPTION */}
         {item.description && (
           <p className="item-description">{item.description}</p>
