@@ -35,16 +35,20 @@ const { t } = useTranslation();
   };
   // ✅ EXACT SAME STATE STRUCTURE AS GROUP
   const [dishDraft, setDishDraft] = useState({
-    name: "",
-    description: "",
-    price: "",
-    image: "",
-    available: true,
-    visible: true,
-    modifiers: [],
-    customProperties: [],
-   remaining: null, // ✅ ADD THIS
-        tags: [] // ✅ ADD THIS
+   name: "",
+  description: "",
+
+  basePrice: null,
+
+  prices: {},
+
+  image: "",
+
+  displaySettings: {},
+
+  modifiers: [],
+  customProperties: [],
+  tags: [],
   });
 
   const [editingTarget, setEditingTarget] = useState(null);
@@ -90,17 +94,20 @@ const { t } = useTranslation();
   const handleAddDish = () => {
     setEditingTarget(null);
     setDishDraft({
-      name: "",
-      description: "",
-      price: "",
-      image: "",
-      available: true,
-      visible: true,
-      modifiers: [],
-      customProperties: [],
-     
-       remaining: null, // ✅ ADD THIS
-        tags: [] // ✅ ADD THIS
+     name: "",
+  description: "",
+
+  basePrice: null,
+
+  prices: {},
+
+  image: "",
+
+  displaySettings: {},
+
+  modifiers: [],
+  customProperties: [],
+  tags: [],
     });
     setShowDishForm(true);
   };
@@ -116,21 +123,56 @@ const { t } = useTranslation();
   };
 
   // ---------------- CLEAN DISH ----------------
-  const cleanDish = (dish) => {
-    return {
-      ...dish,
-      price: dish.price && Number(dish.price) > 0 ? Number(dish.price) : "",
-      modifiers: (dish.modifiers || [])
-        .filter((m) => m.name || m.price)
-        .map((m) => ({
-          ...m,
-          price: m.price && Number(m.price) > 0 ? Number(m.price) : "",
-        })),
-      customProperties: (dish.customProperties || []).filter(
-        (p) => p.key && p.value,
-      ),
-    };
+ const cleanDish = (dish) => {
+  // CLEAN VIEW PRICES
+  const cleanedPrices = Object.fromEntries(
+    Object.entries(dish.prices || {}).filter(
+      ([, value]) =>
+        value !== "" &&
+        value !== null &&
+        value !== undefined
+    )
+  );
+
+  return {
+    ...dish,
+
+    // BASE PRICE
+    basePrice:
+      dish.basePrice === "" ||
+      dish.basePrice === null ||
+      dish.basePrice === undefined
+        ? null
+        : Number(dish.basePrice),
+
+    // VIEW PRICES
+    prices: cleanedPrices,
+
+    // DISPLAY SETTINGS
+    displaySettings: dish.displaySettings || {},
+
+    // MODIFIERS
+    modifiers: (dish.modifiers || [])
+      .filter((m) => m.name || m.price)
+      .map((m) => ({
+        ...m,
+        price:
+          m.price === "" ||
+          m.price === null ||
+          m.price === undefined
+            ? 0
+            : Number(m.price),
+      })),
+
+    // CUSTOM PROPERTIES
+    customProperties: (dish.customProperties || []).filter(
+      (p) => p.key && p.value
+    ),
+
+    // TAGS
+    tags: dish.tags || [],
   };
+};
 
   // ---------------- CREATE OR EDIT DISH ----------------
   const createDish = () => {
@@ -168,16 +210,20 @@ const { t } = useTranslation();
     });
 
     setDishDraft({
-      name: "",
-      description: "",
-      price: "",
-      image: "",
-      available: true,
-      visible: true,
-      modifiers: [],
-      customProperties: [],
-       remaining: null, // ✅ ADD THIS
-        tags: [] // ✅ ADD THIS
+    name: "",
+  description: "",
+
+  basePrice: null,
+
+  prices: {},
+
+  image: "",
+
+  displaySettings: {},
+
+  modifiers: [],
+  customProperties: [],
+  tags: [],
     });
 
     setEditingTarget(null);

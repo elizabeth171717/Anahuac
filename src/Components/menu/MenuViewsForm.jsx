@@ -1,16 +1,23 @@
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 import "./MenuViewsForm.css";
 
-function MenuViewsForm({
+const MenuViewsForm = ({
+  show,
   viewsDraft,
   setViewsDraft,
+  editingTarget,
   onClose,
   onSave,
-}) {
+}) => {
   const { t } = useTranslation();
+const [newViewName, setNewViewName] =
+  useState("");
+  if (!show) return null;
 
-  // ✅ DEFAULT VIEWS
-  const defaultViews = [
+  // DEFAULT SAMPLE VIEWS
+  const starterViews = [
     {
       id: "website",
       name: "Website",
@@ -25,101 +32,127 @@ function MenuViewsForm({
     },
   ];
 
-  // ✅ TOGGLE VIEW
+  // TOGGLE BUILT-IN VIEW
   const toggleView = (view) => {
     const exists = viewsDraft.some((v) => v.id === view.id);
 
     if (exists) {
-      setViewsDraft((prev) => prev.filter((v) => v.id !== view.id));
+      setViewsDraft((prev) =>
+        prev.filter((v) => v.id !== view.id)
+      );
     } else {
       setViewsDraft((prev) => [...prev, view]);
     }
   };
 
-  // ✅ ADD CUSTOM VIEW
+  // ADD CUSTOM VIEW
   const addCustomView = () => {
-    const name = prompt("Enter custom view name");
+  if (!newViewName.trim()) return;
 
-    if (!name?.trim()) return;
-
-    const newView = {
-      id: name.toLowerCase().replace(/\s+/g, "-"),
-      name,
-    };
-
-    setViewsDraft((prev) => [...prev, newView]);
+  const newView = {
+    id: crypto.randomUUID(),
+    name: newViewName,
   };
+
+  setViewsDraft((prev) => [
+    ...prev,
+    newView,
+  ]);
+
+  setNewViewName("");
+};
 
   return (
     <div className="modal-overlay">
       <div className="modal-content">
+
         <h2 className="editing-target-title">
-          {t("menuViews.title")}
+          {editingTarget
+            ? "Edit Menu Views"
+            : "Create Menu Views"}
         </h2>
 
-        <div className="menu-views-list">
-          {defaultViews.map((view) => {
-            const checked = viewsDraft.some((v) => v.id === view.id);
+       <div className="menu-views-list">
+  {viewsDraft.map((view) => {
+    const isStarter =
+      starterViews.some(
+        (starter) => starter.id === view.id
+      );
 
-            return (
-              <label key={view.id} className="menu-view-checkbox">
-                <input
-                  type="checkbox"
-                  checked={checked}
-                  onChange={() => toggleView(view)}
-                />
+    return (
+      <div
+        key={view.id}
+        className="custom-view-row"
+      >
+        <input
+          value={view.name}
+          onChange={(e) =>
+            setViewsDraft((prev) =>
+              prev.map((v) =>
+                v.id === view.id
+                  ? {
+                      ...v,
+                      name: e.target.value,
+                    }
+                  : v
+              )
+            )
+          }
+        />
 
-                {view.name}
-              </label>
-            );
-          })}
-        </div>
-
-        {/* CUSTOM VIEWS */}
-        {viewsDraft
-          .filter(
-            (v) =>
-              !defaultViews.some((defaultView) => defaultView.id === v.id)
-          )
-          .map((view) => (
-            <div key={view.id} className="custom-view-row">
-              <span>{view.name}</span>
-
-              <button
-                type="button"
-                className="remove-custom-view-btn"
-                onClick={() =>
-                  setViewsDraft((prev) =>
-                    prev.filter((v) => v.id !== view.id)
-                  )
-                }
-              >
-                ✕
-              </button>
-            </div>
-          ))}
-
+        <button
+          type="button"
+          onClick={() =>
+            setViewsDraft((prev) =>
+              prev.filter(
+                (v) => v.id !== view.id
+              )
+            )
+          }
+        >
+          ✕
+        </button>
+      </div>
+    );
+  })}
+</div>
+<input
+  type="text"
+  placeholder="New view name"
+  value={newViewName}
+  onChange={(e) =>
+    setNewViewName(e.target.value)
+  }
+  className="new-view-input"
+/>
+        {/* ADD CUSTOM */}
         <button
           type="button"
           className="add-custom-view-btn"
           onClick={addCustomView}
         >
-          + {t("menuViews.addCustomView")}
+          + Add Custom View
         </button>
 
         {/* ACTIONS */}
         <div className="action-buttons-container">
-          <button onClick={onClose} className="cancel-btn">
-            {t("menuViews.cancel")}
+          <button
+            onClick={onClose}
+            className="cancel-btn"
+          >
+            {t("itemForm.cancel")}
           </button>
 
-          <button onClick={onSave} className="save-btn">
-            {t("menuViews.save")}
+          <button
+            onClick={onSave}
+            className="save-btn"
+          >
+            {t("itemForm.save")}
           </button>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default MenuViewsForm;

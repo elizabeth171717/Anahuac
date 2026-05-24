@@ -54,55 +54,6 @@ const ItemCard = ({
     });
   };
 
-  const toggleVisibility = () => {
-    setMenu((prev) => {
-      const menu = structuredClone(prev);
-      const section = menu.sections.find((s) => s.id === sectionId);
-      if (!section) return prev;
-
-      let itemToUpdate;
-
-      if (groupId) {
-        const group = section.groups.find((g) => g.id === groupId);
-        if (!group) return prev;
-
-        itemToUpdate = group.items.find((i) => i.id === item.id);
-      } else {
-        itemToUpdate = section.items.find((i) => i.id === item.id);
-      }
-
-      if (!itemToUpdate) return prev;
-
-      itemToUpdate.visible = !itemToUpdate.visible;
-
-      return menu;
-    });
-  };
-
-  const toggleAvailability = () => {
-  setMenu((prev) => {
-    const menu = structuredClone(prev);
-    const section = menu.sections.find((s) => s.id === sectionId);
-    if (!section) return prev;
-
-    let itemToUpdate;
-
-    if (groupId) {
-      const group = section.groups.find((g) => g.id === groupId);
-      if (!group) return prev;
-
-      itemToUpdate = group.items.find((i) => i.id === item.id);
-    } else {
-      itemToUpdate = section.items.find((i) => i.id === item.id);
-    }
-
-    if (!itemToUpdate) return prev;
-
-    itemToUpdate.available = !itemToUpdate.available;
-
-    return menu;
-  });
-};
 
  const basePrice =
   item.basePrice !== null &&
@@ -122,7 +73,7 @@ const ItemCard = ({
 
   const minModifierPrice =
     modifierPrices.length > 0 ? Math.min(...modifierPrices) : null;
-
+console.log(item);
   return (
     <div className="menu-item-card">
       {/* ACTIONS */}

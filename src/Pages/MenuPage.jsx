@@ -13,7 +13,7 @@ import SectionForm from "../Components/menu/SectionForm";
 import { BACKEND_URL } from "../constants/constants";
 import Section from "../Components/menu/Section";
 import RestaurantNameEditor from "../Components/menu/RestaurantNameEditor";
-import MenuViewsEditor from "../Components/menu/MenuViewsEditor";
+import MenuViewsForm from "../Components/menu/MenuViewsForm";
 
 const client = import.meta.env.VITE_CLIENT;
 
@@ -23,6 +23,11 @@ const MenuPage = () => {
   const [originalMenu, setOriginalMenu] = useState(null);
   const [hasChanges, setHasChanges] = useState(false);
   // ⭐ MODAL STATE
+  const [showViewsForm, setShowViewsForm] =
+  useState(false);
+
+const [viewsDraft, setViewsDraft] =
+  useState([]);
   const [showSectionForm, setShowSectionForm] = useState(false);
   const [draftSectionName, setDraftSectionName] = useState("");
   const [editingSectionId, setEditingSectionId] = useState(null);
@@ -45,9 +50,11 @@ const MenuPage = () => {
       } finally {
         setLoading(false);
       }
+
     };
 
     fetchMenu();
+    
   }, []);
 
   useEffect(() => {
@@ -76,6 +83,26 @@ const MenuPage = () => {
   };
 
   // ✅ OPEN MODAL
+
+
+// ✅ OPEN VIEWS MODAL
+const openViewsModal = () => {
+  setViewsDraft(
+    structuredClone(menu.views || [])
+  );
+
+  setShowViewsForm(true);
+};
+
+// ✅ SAVE VIEWS
+const saveViews = () => {
+  setMenu((prev) => ({
+    ...prev,
+    views: viewsDraft,
+  }));
+
+  setShowViewsForm(false);
+};
 
   const handleAddSection = () => {
     setDraftSectionName("");
@@ -133,17 +160,41 @@ const MenuPage = () => {
       return menu;
     });
   };
-
+console.log("MENU VIEWS IN RENDER:", menu.views);
   return (
     <div className="page">
       <div className="menu-container">
         {/* RESTAURANT NAME */}
         <div className="menu-name-container">
           <RestaurantNameEditor menu={menu} setMenu={setMenu} />
- <MenuViewsEditor
-  menu={menu}
-  setMenu={setMenu}
-/>
+<div className="menu-views-editor">
+  <div className="menu-views-header">
+    <h3>Menu Views</h3>
+
+    <button
+      type="button"
+      onClick={openViewsModal}
+    >
+      Edit Views
+    </button>
+  </div>
+
+  <div className="menu-views-preview">
+    {menu.views?.length > 0 ? (
+      menu.views.map((view) => (
+        <span
+          key={view.id}
+          className="menu-view-chip"
+        >
+          {view.name}
+        </span>
+      ))
+    ) : (
+      <p>No views yet</p>
+    )}
+  </div>
+</div>
+
  {/* ADD SECTION BUTTON */}
           <button className="btn btn-primary" type="button" onClick={handleAddSection}>
             <Plus className="icon plus-icon" />
@@ -204,7 +255,19 @@ const MenuPage = () => {
           isEditing={!!editingSectionId}
         />
       )}
-    </div>
+  {showViewsForm && (
+  <MenuViewsForm
+    show={showViewsForm}
+    viewsDraft={viewsDraft}
+    setViewsDraft={setViewsDraft}
+    onClose={() =>
+      setShowViewsForm(false)
+    }
+    onSave={saveViews}
+  />
+)}
+  
+      </div>
   );
 };
 
