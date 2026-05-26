@@ -92,6 +92,7 @@ const { t } = useTranslation();
     setDishDraft(structuredClone(itemToEdit));
     setEditingTarget({ itemId });
     setShowDishForm(true);
+    console.log(itemToEdit);
   };
 
  // ---------------- CLEAN DISH ----------------

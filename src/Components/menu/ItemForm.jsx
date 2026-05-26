@@ -243,98 +243,154 @@ const { t } = useTranslation();
     );
   })}
 </div>
+{/* MODIFIERS */}
+<h3>{t("itemForm.modifiers")}</h3>
 
-        {/* MODIFIERS */}
-        <h3>{t("itemForm.modifiers")}</h3>
+{dishDraft.modifiers.map((mod, i) => (
+  <div key={i} className="item-modifier-row">
 
-        {dishDraft.modifiers.map((mod, i) => (
-          <div key={i} className="item-modifier-row">
-            <input
-              placeholder={t("itemForm.modifierName")}
-              value={mod.name}
-              onChange={(e) => {
-                const copy = [...dishDraft.modifiers];
-                copy[i].name = e.target.value;
-                setDishDraft((d) => ({ ...d, modifiers: copy }));
-              }}
-              className="item-modifier-name-input"
-            />
+    {/* MODIFIER NAME */}
+    <input
+      placeholder={t("itemForm.modifierName")}
+      value={mod.name}
+      onChange={(e) => {
+        const copy = [...dishDraft.modifiers];
 
-            <input
-              placeholder={t("itemForm.modifierPrice")}
-              value={mod.price}
-              onChange={(e) => {
-                const copy = [...dishDraft.modifiers];
-                copy[i].price = Number(e.target.value);
-                setDishDraft((d) => ({ ...d, modifiers: copy }));
-              }}
-              className="item-modifier-price-input"
-            />
-          </div>
-        ))}
+        copy[i].name = e.target.value;
 
-        <button
-          onClick={() =>
-            setDishDraft((d) => ({
-              ...d,
-              modifiers: [
-                ...d.modifiers,
-                { id: crypto.randomUUID(), name: "", price: 0 },
-              ],
-            }))
-          }
-          className="modifier-add-btn"
-        >
-        {t("itemForm.addModifier")}
-        </button>
+        setDishDraft((d) => ({
+          ...d,
+          modifiers: copy,
+        }));
+      }}
+      className="item-modifier-name-input"
+    />
 
-        {/* CUSTOM PROPERTIES */}
-        <h3>{t("itemForm.customProperties")}</h3>
+    {/* MODIFIER PRICE */}
+    <input
+      type="number"
+      placeholder={t("itemForm.modifierPrice")}
+      value={mod.price}
+      onChange={(e) => {
+        const copy = [...dishDraft.modifiers];
 
-        {dishDraft.customProperties.map((prop, i) => (
-          <div key={i} className="costume-property-row">
-            <input
-              placeholder={t("itemForm.propertyKey")}
-              value={prop.key}
-              onChange={(e) => {
-                const copy = [...dishDraft.customProperties];
-                copy[i].key = e.target.value;
-                setDishDraft((d) => ({
-                  ...d,
-                  customProperties: copy,
-                }));
-              }}
-              className="item-custom-property-key-input"
-            />
+        copy[i].price = Number(e.target.value);
 
-            <input
-              placeholder={t("itemForm.propertyValue")}
-              value={prop.value}
-              onChange={(e) => {
-                const copy = [...dishDraft.customProperties];
-                copy[i].value = e.target.value;
-                setDishDraft((d) => ({
-                  ...d,
-                  customProperties: copy,
-                }));
-              }}
-              className="item-custom-property-value-input"
-            />
-          </div>
-        ))}
+        setDishDraft((d) => ({
+          ...d,
+          modifiers: copy,
+        }));
+      }}
+      className="item-modifier-price-input"
+    />
 
-        <button
-          onClick={() =>
-            setDishDraft((d) => ({
-              ...d,
-              customProperties: [...d.customProperties, { key: "", value: "" }],
-            }))
-          }
-          className="custom-property-add-btn"
-        >
-        {t("itemForm.addProperty")}
-        </button>
+    {/* MODIFIER TYPE */}
+    <select
+      value={mod.type || "addon"}
+      onChange={(e) => {
+        const copy = [...dishDraft.modifiers];
 
+        copy[i].type = e.target.value;
+
+        setDishDraft((d) => ({
+          ...d,
+          modifiers: copy,
+        }));
+      }}
+      className="modifier-type-select"
+    >
+      <option value="addon">
+        Addon
+      </option>
+
+      <option value="variant">
+        Variant
+      </option>
+    </select>
+
+  </div>
+))}
+
+<button
+  onClick={() =>
+    setDishDraft((d) => ({
+      ...d,
+      modifiers: [
+        ...d.modifiers,
+        {
+          id: crypto.randomUUID(),
+          name: "",
+          price: 0,
+          type: "addon",
+        },
+      ],
+    }))
+  }
+  className="modifier-add-btn"
+>
+  {t("itemForm.addModifier")}
+</button>
+
+{/* CUSTOM PROPERTIES */}
+<h3>{t("itemForm.customProperties")}</h3>
+
+{dishDraft.customProperties.map((prop, i) => (
+  <div key={i} className="costume-property-row">
+
+    {/* PROPERTY KEY */}
+    <input
+      placeholder={t("itemForm.propertyKey")}
+      value={prop.key}
+      onChange={(e) => {
+        const copy = [...dishDraft.customProperties];
+
+        copy[i].key = e.target.value;
+
+        setDishDraft((d) => ({
+          ...d,
+          customProperties: copy,
+        }));
+      }}
+      className="item-custom-property-key-input"
+    />
+
+    {/* PROPERTY VALUE */}
+    <input
+      placeholder={t("itemForm.propertyValue")}
+      value={prop.value}
+      onChange={(e) => {
+        const copy = [...dishDraft.customProperties];
+
+        copy[i].value = e.target.value;
+
+        setDishDraft((d) => ({
+          ...d,
+          customProperties: copy,
+        }));
+      }}
+      className="item-custom-property-value-input"
+    />
+
+  </div>
+))}
+
+<button
+  onClick={() =>
+    setDishDraft((d) => ({
+      ...d,
+      customProperties: [
+        ...d.customProperties,
+        {
+          key: "",
+          value: "",
+        },
+      ],
+    }))
+  }
+  className="custom-property-add-btn"
+>
+  {t("itemForm.addProperty")}
+</button>
 
 
 {/* TAG SELECTOR */}

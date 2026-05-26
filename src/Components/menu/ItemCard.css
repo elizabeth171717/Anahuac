@@ -178,3 +178,25 @@ font-weight: bold;
 }
 
 
+
+
+
+
+
+.item-modifier-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.item-modifier-name-input {
+  flex: 2;
+}
+
+.item-modifier-price-input {
+  width: 100px;
+}
+
+.modifier-type-select {
+  width: 120px;
+}

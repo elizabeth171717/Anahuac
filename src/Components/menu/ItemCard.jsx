@@ -1,4 +1,4 @@
-import { Trash2, Copy, Pencil, Eye, EyeOff } from "lucide-react";
+import { Trash2, Copy, Pencil } from "lucide-react";
 import "./ItemCard.css";
 
 const ItemCard = ({
@@ -67,13 +67,26 @@ const ItemCard = ({
   const properties =
     item.customProperties?.filter((p) => p.key && p.value) || [];
 
-  const modifierPrices = modifiers
-    .map((m) => Number(m.price))
-    .filter((p) => p > 0);
+ 
+    const variantPrices = modifiers
+  .filter((m) => m.type === "variant")
+  .map((m) => Number(m.price))
+  .filter((p) => p > 0);
 
-  const minModifierPrice =
-    modifierPrices.length > 0 ? Math.min(...modifierPrices) : null;
+const minVariantPrice =
+  variantPrices.length > 0
+    ? Math.min(...variantPrices)
+    : null;
+
+ 
 console.log(item);
+const addons = modifiers.filter(
+  (m) => m.type === "addon"
+);
+
+const variants = modifiers.filter(
+  (m) => m.type === "variant"
+);
   return (
     <div className="menu-item-card">
       {/* ACTIONS */}
@@ -95,20 +108,19 @@ console.log(item);
       <div className="card-details">
         {/* NAME & PRICE*/}
         <div className="name-price">
-         <p className="item-price">
+        <p className="item-price">
 
   {/* BASE PRICE */}
   {basePrice !== null && (
     <>${basePrice}</>
   )}
 
-  {/* MODIFIER-ONLY ITEMS */}
+  {/* VARIANT-ONLY ITEMS */}
   {basePrice === null &&
-    minModifierPrice && (
-      <>From ${minModifierPrice}</>
+    minVariantPrice && (
+      <>From ${minVariantPrice}</>
     )}
 </p>
-
           <p className="item-name">{item.name}</p>
         </div>
         <div className="view-price-list">
@@ -171,20 +183,37 @@ console.log(item);
   })}
 </div>
         {/* MODIFIERS */}
-        {modifiers.length > 0 && (
-          <div className="modifiers-section">
-            <p className="modifiers">Modifiers:</p>
+       {/* VARIANTS */}
+{variants.length > 0 && (
+  <div className="modifiers-section">
+    <p className="modifiers">Variants:</p>
 
-            <ul className="modifiers-list">
-              {modifiers.map((mod, index) => (
-                <li key={index}>
-                  {mod.name}
-                  {mod.price && ` - $${mod.price}`}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+    <ul className="modifiers-list">
+      {variants.map((mod, index) => (
+        <li key={index}>
+          {mod.name}
+          {mod.price && ` - $${mod.price}`}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+{/* ADDONS */}
+{addons.length > 0 && (
+  <div className="modifiers-section">
+    <p className="modifiers">Addons:</p>
+
+    <ul className="modifiers-list">
+      {addons.map((mod, index) => (
+        <li key={index}>
+          {mod.name}
+          {mod.price && ` - $${mod.price}`}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
         {/* CUSTOM PROPERTIES */}
         {properties.length > 0 && (
           <div className="custom-properties-section">
