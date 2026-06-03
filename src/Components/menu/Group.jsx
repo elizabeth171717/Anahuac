@@ -3,7 +3,7 @@ import { Trash2, Copy, Plus, Pencil } from "lucide-react";
 import ItemCard from "./ItemCard";
 import ItemForm from "./ItemForm";
 import { useTranslation } from "react-i18next";
-const Group = ({ sectionId, group, setMenu, onEditGroup,  views}) => {
+const Group = ({ sectionId, group, setMenu, onEditGroup,  views, isOwner}) => {
   const safeItems = group.items || [];
 const { t } = useTranslation();
   const [showDishForm, setShowDishForm] = useState(false);
@@ -213,6 +213,8 @@ const cleanDish = (dish) => {
         <div className="group-tittle-wrapper">
           <h3>{group.groupName}</h3>
           <div className="icons">
+             {isOwner && (
+    <>
             <Pencil
               className="icon edit-icon"
               onClick={() => onEditGroup(group)}
@@ -223,13 +225,18 @@ const cleanDish = (dish) => {
             />
 
             <Trash2 className="icon trash-icon" onClick={handleDeleteGroup} />
+            
+            </>
+            )}
           </div>
+          {isOwner && (
           <div className="add-dish">
             <button className="btn" onClick={handleAddDish}>
               <Plus className="icon add-icon" />
               {t("group.addItem")}
             </button>
           </div>
+          )}
         </div>
 
         {/* ADD DISH */}
@@ -240,6 +247,7 @@ const cleanDish = (dish) => {
             <ItemCard
               key={item.id}
               item={item}
+              isOwner={isOwner}
               sectionId={sectionId}
               groupId={group.id}
               setMenu={setMenu}

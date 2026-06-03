@@ -7,6 +7,7 @@ const ItemCard = ({
   groupId = null,
   setMenu,
   openEditDish,
+  isOwner,
   views = [],
 }) => {
    // DELETE
@@ -91,7 +92,8 @@ const variants = modifiers.filter(
     <div className="menu-item-card">
       {/* ACTIONS */}
       <div className="icons-container">
-       
+          {isOwner && (
+    <>
         <Copy className="icon duplicate-icon" onClick={handleDuplicate} />
 
 
@@ -100,6 +102,8 @@ const variants = modifiers.filter(
           className="icon edit-icon"
           onClick={() => openEditDish(sectionId, groupId, item.id)}
         />
+        </>
+          )}
       </div>
       {/* IMAGE */}
       {item.image && (

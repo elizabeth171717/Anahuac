@@ -25,7 +25,9 @@ const MenuPage = () => {
   // ⭐ MODAL STATE
   const [showViewsForm, setShowViewsForm] =
   useState(false);
+  const [mode, setMode] = useState("owner");
 
+const isOwner = mode === "owner";
 const [viewsDraft, setViewsDraft] =
   useState([]);
   const [showSectionForm, setShowSectionForm] = useState(false);
@@ -164,19 +166,44 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
   return (
     <div className="page">
       <div className="menu-container">
+
+        <div className="view-toggle">
+  <button
+    className="btn"
+    onClick={() =>
+      setMode(isOwner ? "public" : "owner")
+    }
+  >
+    {isOwner
+      ? "👀 Preview Menu"
+      : "✏️ Back To Editing"}
+  </button>
+</div>
         {/* RESTAURANT NAME */}
         <div className="menu-name-container">
-          <RestaurantNameEditor menu={menu} setMenu={setMenu} />
+          {isOwner ? (
+  <RestaurantNameEditor
+    menu={menu}
+    setMenu={setMenu}
+  />
+  
+) : (
+  <h1>{menu.restaurantName}</h1>
+)}
 <div className="menu-views-editor">
   <div className="menu-views-header">
     <h3>Menu Views</h3>
 
-    <button
-      type="button"
-      onClick={openViewsModal}
-    >
-      Edit Views
-    </button>
+   
+
+    {isOwner && (
+  <button
+    type="button"
+    onClick={openViewsModal}
+  >
+    Edit Views
+  </button>
+)}
   </div>
 
   <div className="menu-views-preview">
@@ -196,24 +223,29 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
 </div>
 
  {/* ADD SECTION BUTTON */}
-          <button className="btn btn-primary" type="button" onClick={handleAddSection}>
-            <Plus className="icon plus-icon" />
-           
-            {t("menuEditor.addSection")}
-          </button>
+       {isOwner && (
+  <button
+    className="btn btn-primary"
+    type="button"
+    onClick={handleAddSection}
+  >
+    <Plus className="icon plus-icon" />
+    {t("menuEditor.addSection")}
+  </button>
+)}
         </div>
         {/* MASTER SAVE MENU BUTTON */}
+{isOwner && hasChanges && (
+  <button
+    type="button"
+    className="btn save-menu-btn"
+    onClick={saveMenu}
+  >
+    {t("menuEditor.saveMenu")}
+  </button>
+)}
 
-        {hasChanges && (
-          <button
-            type="button"
-            className="btn save-menu-btn"
-            onClick={saveMenu}
-          >
-             {t("menuEditor.saveMenu")}
-            
-          </button>
-        )}
+
         {/* SECTIONS */}
         <DndContext
           collisionDetection={closestCenter}
@@ -229,6 +261,7 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
                 section={section}
                 setMenu={setMenu}
                  views={menu.views}
+                  isOwner={isOwner}
                 onEditSection={(section) => {
                   setDraftSectionName(section.section);
                   setEditingSectionId(section.id);
@@ -255,7 +288,7 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
           isEditing={!!editingSectionId}
         />
       )}
-  {showViewsForm && (
+  {isOwner && showViewsForm && (
   <MenuViewsForm
     show={showViewsForm}
     viewsDraft={viewsDraft}

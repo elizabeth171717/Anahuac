@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../constants/constants";
-
+import MenuPage from "./MenuPage";
 const client = import.meta.env.VITE_CLIENT;
 
 export default function AdminDashboard() {
@@ -53,9 +53,14 @@ export default function AdminDashboard() {
           ))}
         </tbody>
       </table>
+      
       <Link to="/security">
         <button className="btn">🔒 Change Password</button>
       </Link>
+
+        <div className="menu-page-div">
+        <MenuPage />
+      </div>
     </div>
   );
 }

@@ -17,7 +17,7 @@ import "./Modal.css";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-const Section = ({ section, setMenu, onEditSection, views }) => {
+const Section = ({ section, setMenu, onEditSection, views, isOwner }) => {
   const safeGroups = section.groups || [];
   const safeItems = section.items || [];
   const [collapsed, setCollapsed] = useState(false);
@@ -265,13 +265,17 @@ const { t } = useTranslation();
     <div ref={setNodeRef} style={style} className="menu-section">
       <div className="section-tittle-wrapper">
         <div className="title-container">
+          {isOwner && (
           <span className="drag-handle" {...attributes} {...listeners}>
             <GripVertical className="icon drag-icon" />
           </span>
+          )}
           <h2>{section.section}</h2>
         </div>
 
         <div className="icons">
+           {isOwner && (
+    <>
           <Pencil
             className="icon edit-icon"
             onClick={() => onEditSection(section)}
@@ -287,8 +291,10 @@ const { t } = useTranslation();
           >
             {collapsed ? <ChevronRight /> : <ChevronDown />}
           </button>
+          </>
+           )}
         </div>
-
+{isOwner && (
         <div className="btns-container">
           <div className="add-dish">
             <button className="btn" onClick={handleAddDish}>
@@ -309,6 +315,7 @@ const { t } = useTranslation();
             </button>
           </div>
         </div>
+)}
       </div>
 
       {!collapsed && (
@@ -320,6 +327,7 @@ const { t } = useTranslation();
               group={group}
               setMenu={setMenu}
               views={views}
+              isOwner={isOwner}
               onEditGroup={(group) => {
                 setGroupDraftName(group.groupName);
                 setEditingGroupId(group.id);
@@ -335,6 +343,7 @@ const { t } = useTranslation();
                 item={item}
                 sectionId={section.id}
                 setMenu={setMenu}
+                isOwner={isOwner}
                 openEditDish={() => openEditDish(item.id)}
                 views={views}
               />
@@ -359,6 +368,7 @@ const { t } = useTranslation();
         <GroupForm
           groupDraftName={groupDraftName}
           setGroupDraftName={setGroupDraftName}
+          
           onClose={() => {
             setShowGroupForm(false);
             setEditingGroupId(null);
