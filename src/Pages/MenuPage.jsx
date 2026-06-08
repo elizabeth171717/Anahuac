@@ -190,20 +190,19 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
 ) : (
   <h1>{menu.restaurantName}</h1>
 )}
+   {isOwner && (
 <div className="menu-views-editor">
+  
   <div className="menu-views-header">
+  
     <h3>Menu Views</h3>
 
-   
-
-    {isOwner && (
-  <button
+   <button
     type="button"
     onClick={openViewsModal}
   >
     Edit Views
   </button>
-)}
   </div>
 
   <div className="menu-views-preview">
@@ -221,6 +220,7 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
     )}
   </div>
 </div>
+)}
 
  {/* ADD SECTION BUTTON */}
        {isOwner && (

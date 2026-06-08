@@ -127,8 +127,10 @@ const variants = modifiers.filter(
 </p>
           <p className="item-name">{item.name}</p>
         </div>
+       
+       {isOwner && (
         <div className="view-price-list">
-  {views.map((view) => {
+{views.map((view) => {
 
     const overridePrice =
       item.prices?.[view.id];
@@ -149,12 +151,16 @@ const variants = modifiers.filter(
       </p>
     );
   })}
+  
 </div>
+       )}
+        
         {/* DESCRIPTION */}
         {item.description && (
           <p className="item-description">{item.description}</p>
         )}
         {/* VIEW STATUS */}
+        {isOwner && (
 <div className="view-status-container">
   {views.map((view) => {
   const settings = item.displaySettings?.[view.id] || {
@@ -186,6 +192,7 @@ const variants = modifiers.filter(
     );
   })}
 </div>
+        )}
         {/* MODIFIERS */}
        {/* VARIANTS */}
 {variants.length > 0 && (

@@ -285,14 +285,15 @@ const { t } = useTranslation();
             onClick={handleDuplicateSection}
           />
           <Trash2 className="icon trash-icon" onClick={handleDeleteSection} />
+           </>
+           )}
           <button
             className="icon collapse-btn"
             onClick={() => setCollapsed(!collapsed)}
           >
             {collapsed ? <ChevronRight /> : <ChevronDown />}
           </button>
-          </>
-           )}
+         
         </div>
 {isOwner && (
         <div className="btns-container">
