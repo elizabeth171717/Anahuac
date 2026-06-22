@@ -48,12 +48,12 @@ const { t } = useTranslation();
 
         {/* PRICE */}
       <div className="pricing-section">
-  <h3>Pricing</h3>
-
+ 
+<h3>{t("itemForm.pricing")}</h3>
   {/* BASE PRICE */}
   <div className="price-row">
-    <label>Base Price</label>
-
+  
+<label>{t("itemForm.basePrice")}</label>
     <input
       type="number"
       value={dishDraft.basePrice ?? ""}
@@ -74,14 +74,17 @@ const { t } = useTranslation();
   {/* VIEW-SPECIFIC PRICES */}
   {views.map((view) => (
     <div key={view.id} className="price-row">
+     
       <label>
-        {view.name} Price Override
-      </label>
+  {t("itemForm.priceOverride", {
+    view: view.name,
+  })}
+</label>
 
       <input
         type="number"
         value={dishDraft.prices?.[view.id] ?? ""}
-        placeholder="Uses base price"
+        placeholder={t("itemForm.usesBasePrice")}
         onChange={(e) => {
           const value = e.target.value;
 
@@ -299,13 +302,14 @@ const { t } = useTranslation();
       }}
       className="modifier-type-select"
     >
-      <option value="addon">
-        Addon
-      </option>
+     
+     <option value="addon">
+  {t("itemForm.addon")}
+</option>
 
-      <option value="variant">
-        Variant
-      </option>
+<option value="variant">
+  {t("itemForm.variant")}
+</option>
     </select>
 
   </div>

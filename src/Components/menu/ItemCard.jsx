@@ -1,6 +1,6 @@
 import { Trash2, Copy, Pencil } from "lucide-react";
 import "./ItemCard.css";
-
+import { useTranslation } from "react-i18next";
 const ItemCard = ({
   item,
   sectionId,
@@ -88,6 +88,7 @@ const addons = modifiers.filter(
 const variants = modifiers.filter(
   (m) => m.type === "variant"
 );
+const { t } = useTranslation();
   return (
     <div className="menu-item-card">
       {/* ACTIONS */}
@@ -116,13 +117,15 @@ const variants = modifiers.filter(
 
   {/* BASE PRICE */}
   {basePrice !== null && (
-    <>${basePrice}</>
+    <>${basePrice.toFixed(2)}</>
+    
   )}
 
   {/* VARIANT-ONLY ITEMS */}
   {basePrice === null &&
     minVariantPrice && (
-      <>From ${minVariantPrice}</>
+      
+      <>{t("itemCard.from")} ${Number(minVariantPrice).toFixed(2)}</>
     )}
 </p>
           <p className="item-name">{item.name}</p>
@@ -147,7 +150,7 @@ const variants = modifiers.filter(
         key={view.id}
         className="view-price"
       >
-        {view.name}: ${overridePrice}
+        {view.name}: ${Number(overridePrice).toFixed(2)}
       </p>
     );
   })}
@@ -175,16 +178,20 @@ const variants = modifiers.filter(
 
         <div className="view-status-info">
           <span>
-            {settings.visible ? "👁️ Visible" : "🙈 Hidden"}
+            {settings.visible
+  ? `👁️ ${t("itemCard.visible")}`
+  : `🙈 ${t("itemCard.hidden")}`}
           </span>
 
           <span>
-            {settings.available ? "✅ Available" : "❌ Unavailable"}
+           {settings.available
+  ? `✅ ${t("itemCard.available")}`
+  : `❌ ${t("itemCard.unavailable")}`}
           </span>
 
           {settings.remaining !== null && (
             <span>
-              📦 {settings.remaining} left
+             📦 {settings.remaining} {t("itemCard.left")}
             </span>
           )}
         </div>
@@ -197,13 +204,15 @@ const variants = modifiers.filter(
        {/* VARIANTS */}
 {variants.length > 0 && (
   <div className="modifiers-section">
-    <p className="modifiers">Variants:</p>
-
+  
+<p className="modifiers">
+  {t("itemCard.variants")}:
+</p>
     <ul className="modifiers-list">
       {variants.map((mod, index) => (
         <li key={index}>
           {mod.name}
-          {mod.price && ` - $${mod.price}`}
+          {mod.price && ` - $${Number(mod.price).toFixed(2)}`}
         </li>
       ))}
     </ul>
@@ -213,13 +222,15 @@ const variants = modifiers.filter(
 {/* ADDONS */}
 {addons.length > 0 && (
   <div className="modifiers-section">
-    <p className="modifiers">Addons:</p>
-
+   
+<p className="modifiers">
+  {t("itemCard.addons")}:
+</p>
     <ul className="modifiers-list">
       {addons.map((mod, index) => (
         <li key={index}>
           {mod.name}
-          {mod.price && ` - $${mod.price}`}
+          {mod.price && ` - $${Number(mod.price).toFixed(2)}`}
         </li>
       ))}
     </ul>
@@ -228,8 +239,10 @@ const variants = modifiers.filter(
         {/* CUSTOM PROPERTIES */}
         {properties.length > 0 && (
           <div className="custom-properties-section">
-            <p className="property">Custom Properties:</p>
-
+          
+<p className="property">
+  {t("itemCard.customProperties")}:
+</p>
             <ul className="property-list">
               {properties.map((prop, index) => (
                 <li key={index}>

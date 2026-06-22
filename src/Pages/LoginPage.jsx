@@ -79,9 +79,21 @@ const { t } = useTranslation();
           </span>
         </div>
 
+
+
+
         <button type="submit" className="btn">
            {t("login.submit")}
         </button>
+      
+<button
+  type="button"
+  className="btn forgot-password-btn"
+  onClick={() => navigate("/forgot-password")}
+>
+  {t("login.forgotPassword")}
+</button>
+
       </form>
     </div>
   );

@@ -11,8 +11,22 @@
     "title": "Login",
     "email": "Email",
     "password": "Password",
-    "submit": "Login"
+    "submit": "Login",
+    "forgotPassword": "Forgot password"
   },
+
+  "forgotPassword": {
+  "title": "Forgot Password",
+  "description": "Enter the email associated with your account.",
+  "emailPlaceholder": "Email",
+  "sendButton": "Send Reset Link",
+  "sending": "Sending...",
+  "successMessage": "If an account exists, a reset link has been sent.",
+  "errorMessage": "Failed to send reset email.",
+  "remembered": "Remembered your password?",
+  "backToLogin": "Back to Login"
+},
+
   "signup": {
     "back": "Back",
     "title": "Create Your Account",
@@ -78,7 +92,45 @@
     "save": "Save",
     "uploadError": "Failed to upload image",
     "invalidImage": "Please upload a valid image file.",
-    "imageTooLarge": "Image too large. Max 2MB allowed."
+    "imageTooLarge": "Image too large. Max 2MB allowed.",
+    "pricing": "Pricing",
+    "basePrice": "Base Price",
+    "priceOverride": "{{view}} Price Override",
+    "usesBasePrice": "Uses base price",
+    "viewSettings": "View Settings",
+    "addon": "Addon",
+"variant": "Variant"
+  },
+  "itemCard": {
+  "visible": "Visible",
+  "hidden": "Hidden",
+  "available": "Available",
+  "unavailable": "Unavailable",
+  "left": "left",
+  "variants": "Variants",
+  "addons": "Addons",
+  "customProperties": "Custom Properties",
+  "from": "From"
+},
+"menuViews": {
+  "editTitle": "Edit Menu Views",
+  "createTitle": "Create Menu Views",
+  "newViewPlaceholder": "New view name",
+  "addCustom": "Add Custom View",
+  "defaultViews": {
+    "website": "Website",
+    "pos": "POS",
+    "kiosk": "Self-Service Kiosk"
   }
+},
+"menuPage": {
+  "loading": "Loading menu...",
+  "noMenu": "No menu found",
+  "previewMenu": "Preview Menu",
+  "backToEditing": "Back To Editing",
+  "menuViews": "Menu Views",
+  "editViews": "Edit Views",
+  "noViewsYet": "No views yet"
+}
 }
 

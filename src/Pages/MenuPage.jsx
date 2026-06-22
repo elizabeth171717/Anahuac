@@ -27,6 +27,7 @@ const MenuPage = () => {
   useState(false);
   const [mode, setMode] = useState("owner");
 
+
 const isOwner = mode === "owner";
 const [viewsDraft, setViewsDraft] =
   useState([]);
@@ -66,8 +67,9 @@ const [viewsDraft, setViewsDraft] =
     setHasChanges(changed);
   }, [menu, originalMenu]);
 
-  if (loading) return <p>Loading menu...</p>;
-  if (!menu) return <p>No menu found</p>;
+  
+if (loading) return <p>{t("menuPage.loading")}</p>;
+if (!menu) return <p>{t("menuPage.noMenu")}</p>;
 
   // ✅ SAVE MENU (MASTER SAVE — KEEP THIS ONE)
   const saveMenu = async () => {
@@ -174,34 +176,23 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
       setMode(isOwner ? "public" : "owner")
     }
   >
-    {isOwner
-      ? "👀 Preview Menu"
-      : "✏️ Back To Editing"}
+  
+      {isOwner
+  ? `👀 ${t("menuPage.previewMenu")}`
+  : `✏️ ${t("menuPage.backToEditing")}`}
   </button>
 </div>
-        {/* RESTAURANT NAME */}
-        <div className="menu-name-container">
-          {isOwner ? (
-  <RestaurantNameEditor
-    menu={menu}
-    setMenu={setMenu}
-  />
-  
-) : (
-  <h1>{menu.restaurantName}</h1>
-)}
-   {isOwner && (
+ {isOwner && (
 <div className="menu-views-editor">
   
   <div className="menu-views-header">
-  
-    <h3>Menu Views</h3>
-
+ 
+<h3>{t("menuPage.menuViews")}</h3>
    <button
     type="button"
     onClick={openViewsModal}
   >
-    Edit Views
+    {t("menuPage.editViews")}
   </button>
   </div>
 
@@ -216,11 +207,24 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
         </span>
       ))
     ) : (
-      <p>No views yet</p>
+      <p>{t("menuPage.noViewsYet")}</p>
     )}
   </div>
 </div>
 )}
+
+        {/* RESTAURANT NAME */}
+        <div className="menu-name-container">
+          {isOwner ? (
+  <RestaurantNameEditor
+    menu={menu}
+    setMenu={setMenu}
+  />
+  
+) : (
+  <h1>{menu.restaurantName}</h1>
+)}
+  
 
  {/* ADD SECTION BUTTON */}
        {isOwner && (

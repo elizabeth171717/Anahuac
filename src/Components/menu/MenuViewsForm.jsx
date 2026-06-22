@@ -17,20 +17,20 @@ const [newViewName, setNewViewName] =
   if (!show) return null;
 
   // DEFAULT SAMPLE VIEWS
-  const starterViews = [
-    {
-      id: "website",
-      name: "Website",
-    },
-    {
-      id: "pos",
-      name: "POS",
-    },
-    {
-      id: "kiosk",
-      name: "Self-Service Kiosk",
-    },
-  ];
+ const starterViews = [
+  {
+    id: "website",
+    name: t("menuViews.defaultViews.website"),
+  },
+  {
+    id: "pos",
+    name: t("menuViews.defaultViews.pos"),
+  },
+  {
+    id: "kiosk",
+    name: t("menuViews.defaultViews.kiosk"),
+  },
+];
 
   // TOGGLE BUILT-IN VIEW
   const toggleView = (view) => {
@@ -67,9 +67,9 @@ const [newViewName, setNewViewName] =
       <div className="modal-content">
 
         <h2 className="editing-target-title">
-          {editingTarget
-            ? "Edit Menu Views"
-            : "Create Menu Views"}
+        {editingTarget
+  ? t("menuViews.editTitle")
+  : t("menuViews.createTitle")}
         </h2>
 
        <div className="menu-views-list">
@@ -118,7 +118,7 @@ const [newViewName, setNewViewName] =
 </div>
 <input
   type="text"
-  placeholder="New view name"
+  placeholder={t("menuViews.newViewPlaceholder")}
   value={newViewName}
   onChange={(e) =>
     setNewViewName(e.target.value)
@@ -131,7 +131,8 @@ const [newViewName, setNewViewName] =
           className="add-custom-view-btn"
           onClick={addCustomView}
         >
-          + Add Custom View
+        
+          + {t("menuViews.addCustom")}
         </button>
 
         {/* ACTIONS */}

@@ -8,7 +8,8 @@ import UserDashboard from "./Pages/UserDashboard";
 import Security from "./Pages/Security";
 import LandingPage from "./Pages/LandingPage";
 import SignupPage from "./Pages/SingupPage";
-
+import ForgotPassword from "./Pages/ForgotPassword";
+import ResetPassword from "./Pages/ResetPassword";
 import VerifyAccount from "./Pages/VerifyAccountPage";
 import EditAccountPage from "./Pages/EditAccountPage";
 import "./App.css";
@@ -33,6 +34,11 @@ function App() {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/verify" element={<VerifyAccount />} />
       <Route path="/editAccount" element={<EditAccountPage />} />
+      <Route path="/forgot-password" element={<ForgotPassword/>} />
+      <Route
+    path="/reset-password/:token"
+    element={<ResetPassword />}
+  />
     </Routes>
   );
 }

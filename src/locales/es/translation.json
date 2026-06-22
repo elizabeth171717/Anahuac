@@ -10,8 +10,22 @@
     "title": "Iniciar sesión",
     "email": "Correo electrónico",
     "password": "Contraseña",
-    "submit": "Iniciar sesión"
+    "submit": "Iniciar sesión",
+     "forgotPassword": "¿Olvidaste tu contraseña?"
   },
+
+"forgotPassword": {
+  "title": "Olvidé mi contraseña",
+  "description": "Ingresa el correo electrónico asociado con tu cuenta.",
+  "emailPlaceholder": "Correo electrónico",
+  "sendButton": "Enviar enlace de restablecimiento",
+  "sending": "Enviando...",
+  "successMessage": "Si existe una cuenta asociada, se ha enviado un enlace para restablecer la contraseña.",
+  "errorMessage": "No se pudo enviar el correo de restablecimiento.",
+  "remembered": "¿Recordaste tu contraseña?",
+  "backToLogin": "Volver al inicio de sesión"
+},
+
    "signup": {
     "back": "Regresar",
     "title": "Crea tu cuenta",
@@ -79,6 +93,44 @@
     "save": "Guardar",
     "uploadError": "Error al subir la imagen",
     "invalidImage": "Sube un archivo de imagen válido.",
-    "imageTooLarge": "Imagen demasiado grande. Máximo 2MB."
+    "imageTooLarge": "Imagen demasiado grande. Máximo 2MB.",
+    "pricing": "Precios",
+    "basePrice": "Precio base",
+    "priceOverride": "Precio personalizado para {{view}}",
+    "usesBasePrice": "Usa el precio base",
+    "viewSettings": "Configuración de vistas",
+   "addon": "Complemento",
+"variant": "Variante"
+  },
+  "itemCard": {
+  "visible": "Visible",
+  "hidden": "Oculto",
+  "available": "Disponible",
+  "unavailable": "No disponible",
+  "left": "restantes",
+  "variants": "Variantes",
+  "addons": "Complementos",
+  "customProperties": "Propiedades personalizadas",
+  "from": "Desde"
+},
+"menuViews": {
+  "editTitle": "Editar vistas del menú",
+  "createTitle": "Crear vistas del menú",
+  "newViewPlaceholder": "Nombre de la nueva vista",
+  "addCustom": "Agregar vista personalizada",
+  "defaultViews": {
+    "website": "Sitio web",
+    "pos": "Punto de venta",
+    "kiosk": "Quiosco de autoservicio"
   }
+},
+"menuPage": {
+  "loading": "Cargando menú...",
+  "noMenu": "No se encontró menú",
+  "previewMenu": "Vista previa del menú",
+  "backToEditing": "Volver a editar",
+  "menuViews": "Vistas del menú",
+  "editViews": "Editar vistas",
+  "noViewsYet": "Aún no hay vistas"
+}
 }
