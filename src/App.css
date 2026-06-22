@@ -125,7 +125,11 @@ justify-content: center;
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
 }
 
-
+.menu-views-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 /* =========================================
   SECTIONS NAME
 ========================================= */

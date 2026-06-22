@@ -7,7 +7,7 @@ import {
   verticalListSortingStrategy,
   arrayMove,
 } from "@dnd-kit/sortable";
-import { Plus } from "lucide-react";
+import { Plus, Pencil  } from "lucide-react";
 import axios from "axios";
 import SectionForm from "../Components/menu/SectionForm";
 import { BACKEND_URL } from "../constants/constants";
@@ -182,37 +182,33 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
   : `✏️ ${t("menuPage.backToEditing")}`}
   </button>
 </div>
- {isOwner && (
-<div className="menu-views-editor">
-  
-  <div className="menu-views-header">
- 
-<h3>{t("menuPage.menuViews")}</h3>
-   <button
-    type="button"
-    onClick={openViewsModal}
-  >
-    {t("menuPage.editViews")}
-  </button>
-  </div>
+{isOwner && (
+  <div className="menu-views-editor">
+    <div className="menu-views-header">
+      <h3>{t("menuPage.menuViews")}</h3>
 
-  <div className="menu-views-preview">
-    {menu.views?.length > 0 ? (
-      menu.views.map((view) => (
-        <span
-          key={view.id}
-          className="menu-view-chip"
-        >
-          {view.name}
-        </span>
-      ))
-    ) : (
-      <p>{t("menuPage.noViewsYet")}</p>
-    )}
+      <Pencil
+        className="icon edit-icon"
+        onClick={openViewsModal}
+      />
+    </div>
+
+    <div className="menu-views-preview">
+      {menu.views?.length > 0 ? (
+        menu.views.map((view) => (
+          <span
+            key={view.id}
+            className="menu-view-chip"
+          >
+            {view.name}
+          </span>
+        ))
+      ) : (
+        <p>{t("menuPage.noViewsYet")}</p>
+      )}
+    </div>
   </div>
-</div>
 )}
-
         {/* RESTAURANT NAME */}
         <div className="menu-name-container">
           {isOwner ? (
@@ -239,7 +235,10 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
 )}
         </div>
         {/* MASTER SAVE MENU BUTTON */}
-{isOwner && hasChanges && (
+{isOwner &&
+  hasChanges &&
+  !showSectionForm &&
+  !showViewsForm && (
   <button
     type="button"
     className="btn save-menu-btn"

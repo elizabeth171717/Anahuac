@@ -178,10 +178,16 @@ font-weight: bold;
 }
 
 
+.view-status-card {
+  display: flex;
+  align-items: center;
+  gap: .20rem;
+font-size:small;
+}
 
-
-
-
+.view-name{
+  font-weight: bold;
+}
 
 .item-modifier-row {
   display: flex;

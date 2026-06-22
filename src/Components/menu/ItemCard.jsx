@@ -131,75 +131,67 @@ const { t } = useTranslation();
           <p className="item-name">{item.name}</p>
         </div>
        
-       {isOwner && (
-        <div className="view-price-list">
-{views.map((view) => {
-
-    const overridePrice =
-      item.prices?.[view.id];
-
-    if (
-      overridePrice === undefined ||
-      overridePrice === null
-    ) {
-      return null;
-    }
-
-    return (
-      <p
-        key={view.id}
-        className="view-price"
-      >
-        {view.name}: ${Number(overridePrice).toFixed(2)}
-      </p>
-    );
-  })}
-  
-</div>
-       )}
+      
         
         {/* DESCRIPTION */}
         {item.description && (
           <p className="item-description">{item.description}</p>
         )}
         {/* VIEW STATUS */}
-        {isOwner && (
-<div className="view-status-container">
-  {views.map((view) => {
-  const settings = item.displaySettings?.[view.id] || {
-  visible: true,
-  available: true,
-  remaining: null,
-};
+       {isOwner && (
+  <div className="view-status-container">
+    {views.map((view) => {
+      const settings =
+        item.displaySettings?.[view.id] || {
+          visible: true,
+          available: true,
+          remaining: null,
+        };
 
-    return (
-      <div key={view.id} className="view-status-card">
-        <p className="view-name">{view.name}</p>
+      const overridePrice =
+        item.prices?.[view.id];
 
-        <div className="view-status-info">
+      return (
+        <div
+          key={view.id}
+          className="view-status-card"
+        >
+          
+
+          <span className="view-name">
+            {view.name}
+          </span>
+
+         
+           {overridePrice !== undefined &&
+            overridePrice !== null && (
+              <span className="view-price-inline">
+                ${Number(overridePrice).toFixed(2)}
+              </span>
+          )}
           <span>
             {settings.visible
-  ? `👁️ ${t("itemCard.visible")}`
-  : `🙈 ${t("itemCard.hidden")}`}
+              ? `👁️ ${t("itemCard.visible")}`
+              : `🙈 ${t("itemCard.hidden")}`}
           </span>
 
           <span>
-           {settings.available
-  ? `✅ ${t("itemCard.available")}`
-  : `❌ ${t("itemCard.unavailable")}`}
+            {settings.available
+              ? `✅ ${t("itemCard.available")}`
+              : `❌ ${t("itemCard.unavailable")}`}
           </span>
 
           {settings.remaining !== null && (
             <span>
-             📦 {settings.remaining} {t("itemCard.left")}
+              📦 {settings.remaining}{" "}
+              {t("itemCard.left")}
             </span>
           )}
         </div>
-      </div>
-    );
-  })}
-</div>
-        )}
+      );
+    })}
+  </div>
+)}
         {/* MODIFIERS */}
        {/* VARIANTS */}
 {variants.length > 0 && (
