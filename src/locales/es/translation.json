@@ -122,7 +122,13 @@
     "website": "Sitio web",
     "pos": "Punto de venta",
     "kiosk": "Quiosco de autoservicio"
-  }
+      
+    
+  },
+   "title": "Menu Views",
+    "yourViews": "Your Views",
+    "addAnotherView": "Add Another View"
+  
 },
 "menuPage": {
   "loading": "Cargando menú...",

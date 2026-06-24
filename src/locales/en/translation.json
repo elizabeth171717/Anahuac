@@ -121,7 +121,12 @@
     "website": "Website",
     "pos": "POS",
     "kiosk": "Self-Service Kiosk"
-  }
+    
+  },
+   "title": "Menu Views",
+    "yourViews": "Your Views",
+    "addAnotherView": "Add Another View"
+   
 },
 "menuPage": {
   "loading": "Loading menu...",

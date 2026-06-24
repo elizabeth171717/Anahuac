@@ -62,98 +62,108 @@ const [newViewName, setNewViewName] =
   setNewViewName("");
 };
 
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+ return (
+  <div className="modal-overlay">
+    <div className="modal-content">
 
-        <h2 className="editing-target-title">
-        {editingTarget
-  ? t("menuViews.editTitle")
-  : t("menuViews.createTitle")}
-        </h2>
+      <h2 className="editing-target-title">
+        {t("menuViews.title")}
+      </h2>
 
-       <div className="menu-views-list">
-  {viewsDraft.map((view) => {
-    const isStarter =
-      starterViews.some(
-        (starter) => starter.id === view.id
-      );
+      {/* YOUR VIEWS */}
+      <h3 className="menu-views-subtitle">
+        {t("menuViews.yourViews")}
+      </h3>
 
-    return (
-      <div
-        key={view.id}
-        className="custom-view-row"
+      <div className="menu-views-list">
+        {viewsDraft.map((view) => {
+          const isStarter =
+            starterViews.some(
+              (starter) => starter.id === view.id
+            );
+
+          return (
+            <div
+              key={view.id}
+              className="custom-view-row"
+            >
+              <input
+                value={view.name}
+                onChange={(e) =>
+                  setViewsDraft((prev) =>
+                    prev.map((v) =>
+                      v.id === view.id
+                        ? {
+                            ...v,
+                            name: e.target.value,
+                          }
+                        : v
+                    )
+                  )
+                }
+              />
+
+              <button
+                type="button"
+                
+                onClick={() =>
+                  setViewsDraft((prev) =>
+                    prev.filter(
+                      (v) => v.id !== view.id
+                    )
+                  )
+                }
+              >
+                ✕
+              </button>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ADD NEW VIEW */}
+      <h3 className="menu-views-subtitle">
+        {t("menuViews.addAnotherView")}
+      </h3>
+
+      <input
+        type="text"
+        placeholder={t("menuViews.newViewPlaceholder")}
+        value={newViewName}
+        onChange={(e) =>
+          setNewViewName(e.target.value)
+        }
+        className="new-view-input"
+      />
+
+      <button
+        type="button"
+        className=" btn add-custom-view-btn"
+        onClick={addCustomView}
       >
-        <input
-          value={view.name}
-          onChange={(e) =>
-            setViewsDraft((prev) =>
-              prev.map((v) =>
-                v.id === view.id
-                  ? {
-                      ...v,
-                      name: e.target.value,
-                    }
-                  : v
-              )
-            )
-          }
-        />
+        + {t("menuViews.addCustom")}
+      </button>
 
+      {/* ACTIONS */}
+      <div className="action-buttons-container">
         <button
-          type="button"
-          onClick={() =>
-            setViewsDraft((prev) =>
-              prev.filter(
-                (v) => v.id !== view.id
-              )
-            )
-          }
+          onClick={onClose}
+          className="cancel-btn"
         >
-          ✕
-        </button>
-      </div>
-    );
-  })}
-</div>
-<input
-  type="text"
-  placeholder={t("menuViews.newViewPlaceholder")}
-  value={newViewName}
-  onChange={(e) =>
-    setNewViewName(e.target.value)
-  }
-  className="new-view-input"
-/>
-        {/* ADD CUSTOM */}
-        <button
-          type="button"
-          className="add-custom-view-btn"
-          onClick={addCustomView}
-        >
-        
-          + {t("menuViews.addCustom")}
+          {t("itemForm.cancel")}
         </button>
 
-        {/* ACTIONS */}
-        <div className="action-buttons-container">
-          <button
-            onClick={onClose}
-            className="cancel-btn"
-          >
-            {t("itemForm.cancel")}
-          </button>
-
-          <button
-            onClick={onSave}
-            className="save-btn"
-          >
-            {t("itemForm.save")}
-          </button>
-        </div>
+        <button
+          onClick={onSave}
+          className="save-btn"
+        >
+          {t("itemForm.save")}
+        </button>
       </div>
+
     </div>
-  );
+  </div>
+);
 };
 
 export default MenuViewsForm;

@@ -168,7 +168,7 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
   return (
     <div className="page">
       <div className="menu-container">
-
+<div className="menu-page-header">
         <div className="view-toggle">
   <button
     className="btn"
@@ -183,32 +183,15 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
   </button>
 </div>
 {isOwner && (
-  <div className="menu-views-editor">
-    <div className="menu-views-header">
-      <h3>{t("menuPage.menuViews")}</h3>
-
-      <Pencil
-        className="icon edit-icon"
-        onClick={openViewsModal}
-      />
-    </div>
-
-    <div className="menu-views-preview">
-      {menu.views?.length > 0 ? (
-        menu.views.map((view) => (
-          <span
-            key={view.id}
-            className="menu-view-chip"
-          >
-            {view.name}
-          </span>
-        ))
-      ) : (
-        <p>{t("menuPage.noViewsYet")}</p>
-      )}
-    </div>
-  </div>
+  <button
+    type="button"
+    className="btn menu-views-button"
+    onClick={openViewsModal}
+  >
+    {t("menuPage.menuViews")}
+  </button>
 )}
+</div>
         {/* RESTAURANT NAME */}
         <div className="menu-name-container">
           {isOwner ? (
