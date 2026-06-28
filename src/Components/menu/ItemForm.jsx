@@ -7,6 +7,16 @@ const client = import.meta.env.VITE_CLIENT;
 console.log("📦 Backend URL:", BACKEND_URL);
 console.log("🏷️ Client tenant:", client);
 
+
+export const optimizeImage = (url) => {
+  if (!url?.includes("cloudinary")) return url;
+
+  return url.replace(
+    "/upload/",
+    "/upload/f_auto,q_auto,c_fill,w_800,h_800/"
+  );
+};
+
 const ItemForm = ({
   show,
   dishDraft,
@@ -18,6 +28,8 @@ const ItemForm = ({
 }) => {
   if (!show) return null;
 const { t } = useTranslation();
+
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -122,8 +134,8 @@ const { t } = useTranslation();
               return;
             }
 
-            // Validate size (2MB)
-            const maxSize = 2 * 1024 * 1024;
+            // Validate size 
+            const maxSize = 10 * 1024 * 1024;
             if (file.size > maxSize) {
               alert(t("itemForm.imageTooLarge"));
               return;

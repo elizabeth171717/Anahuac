@@ -76,12 +76,19 @@ display: flex;
 /* =========================================
    IMAGE
 ========================================= */
+.item-image-wrapper {
+  width: 100%;
+  height: 220px; /* your card image height */
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+  position: relative;
+}
+
 .item-image {
   width: 100%;
-  height: 220px;
+  height: 100%;
   object-fit: cover;
-  border-radius: 14px;
- 
+  display: block;
 }
 
 .card-details{

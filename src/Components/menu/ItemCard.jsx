@@ -1,6 +1,7 @@
 import { Trash2, Copy, Pencil } from "lucide-react";
 import "./ItemCard.css";
 import { useTranslation } from "react-i18next";
+import { optimizeImage } from "./ItemForm";
 const ItemCard = ({
   item,
   sectionId,
@@ -107,9 +108,17 @@ const { t } = useTranslation();
           )}
       </div>
       {/* IMAGE */}
+
       {item.image && (
-        <img src={item.image} alt={item.name} className="item-image" />
-      )}
+          <div className="item-image-wrapper">
+  <img
+    src={optimizeImage(item.image)}
+    alt={item.name}
+    className="item-image"
+    loading="lazy"
+  />
+  </div>
+)}
       <div className="card-details">
         {/* NAME & PRICE*/}
         <div className="name-price">
