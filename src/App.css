@@ -77,21 +77,6 @@ body {
 }
 
 
-/* =========================================
-  RESTAURANT NAME/EDITOR
-========================================= */
-
-.menu-name-container{
-  display: flex;
-  align-items: center;
- padding: .50rem;
-  gap: 1rem;
- text-align: center;
-justify-content: center;
-
-  flex-wrap: wrap;
- 
-}
 
 /* =========================================
  menu header
@@ -101,20 +86,29 @@ justify-content: center;
   display: flex;
   justify-content: space-between;
   padding: 1rem .50rem;
-}
-
-.restaurant-name-container {
-  display: flex;
- gap: 1rem;
-  flex-wrap: nowrap; /* prevents wrapping */
-
- align-items: center;
  
 }
 
-.restaurant-name {
-  margin: 0;          /* remove default h1 margin */
-  white-space: nowrap; /* prevents text from pushing icon down */
+/* =========================================
+  RESTAURANT NAME/EDITOR
+========================================= */
+.menu-name-container{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+
+
+.restaurant-name-container {
+  display: flex;
+ gap: .50rem;
+ padding: 0 .50rem;
+align-items: center;
+justify-content: center;
+ 
+ 
 }
 
 .restaurant-name-input {
