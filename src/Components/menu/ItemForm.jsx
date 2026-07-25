@@ -282,22 +282,26 @@ const { t } = useTranslation();
     />
 
     {/* MODIFIER PRICE */}
-    <input
-      type="number"
-      placeholder={t("itemForm.modifierPrice")}
-      value={mod.price}
-      onChange={(e) => {
-        const copy = [...dishDraft.modifiers];
+<input
+  type="number"
+  placeholder={t("itemForm.modifierPrice")}
+  value={mod.price ?? ""}
+  onChange={(e) => {
+    const value = e.target.value;
+    const copy = [...dishDraft.modifiers];
 
-        copy[i].price = Number(e.target.value);
+    copy[i].price =
+      value === ""
+        ? null
+        : Number(value);
 
-        setDishDraft((d) => ({
-          ...d,
-          modifiers: copy,
-        }));
-      }}
-      className="item-modifier-price-input"
-    />
+    setDishDraft((d) => ({
+      ...d,
+      modifiers: copy,
+    }));
+  }}
+  className="item-modifier-price-input"
+/>
 
     {/* MODIFIER TYPE */}
     <select
@@ -336,7 +340,7 @@ const { t } = useTranslation();
         {
           id: crypto.randomUUID(),
           name: "",
-          price: 0,
+          price: null,
           type: "addon",
         },
       ],

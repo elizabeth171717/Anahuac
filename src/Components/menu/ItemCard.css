@@ -56,12 +56,11 @@ display: flex;
    CARD ICONS
 ========================================= */
 .icons-container {
-  position: absolute;
-  top: .75rem;
-  right: .50rem;
+  padding: .50rem 0;
   display: flex;
+  justify-content: right;
   gap: 1.25rem;
-    z-index: 10; /* ensures icons stay above image */
+ 
 }
 
 
@@ -80,7 +79,7 @@ display: flex;
   width: 100%;
   height: 220px; /* your card image height */
   overflow: hidden;
-  border-radius: 16px 16px 0 0;
+  
   position: relative;
 }
 
@@ -116,28 +115,6 @@ gap: .50rem;}
  
 }
 
-/* =========================================
-   STATUS BADGES
-========================================= */
-.text-green-600,
-.text-red-500 {
-  font-size: 11px;
-  padding: 4px 8px;
-  border-radius: 20px;
-  display: inline-block;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.text-green-600 {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.text-red-500 {
-  background: #fee2e2;
-  color: #991b1b;
-}
 
 .visibility {
  
