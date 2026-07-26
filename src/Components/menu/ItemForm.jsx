@@ -171,9 +171,10 @@ const { t } = useTranslation();
           }}
         />
 {/* VIEW SETTINGS */}
-<h3>{t("itemForm.viewSettings")}</h3>
 
 <div className="view-settings-container">
+  <h3>{t("itemForm.viewSettings")}</h3>
+
   {views.map((view) => {
     const settings = dishDraft.displaySettings?.[view.id] || {
       visible: true,
@@ -263,6 +264,30 @@ const { t } = useTranslation();
 
 {dishDraft.modifiers.map((mod, i) => (
   <div key={i} className="item-modifier-row">
+ {/* MODIFIER TYPE */}
+    <select
+      value={mod.type || "addon"}
+      onChange={(e) => {
+        const copy = [...dishDraft.modifiers];
+
+        copy[i].type = e.target.value;
+
+        setDishDraft((d) => ({
+          ...d,
+          modifiers: copy,
+        }));
+      }}
+      className="modifier-type-select"
+    >
+     
+     <option value="addon">
+  {t("itemForm.addon")}
+</option>
+
+<option value="variant">
+  {t("itemForm.variant")}
+</option>
+    </select>
 
     {/* MODIFIER NAME */}
     <input
@@ -303,31 +328,7 @@ const { t } = useTranslation();
   className="item-modifier-price-input"
 />
 
-    {/* MODIFIER TYPE */}
-    <select
-      value={mod.type || "addon"}
-      onChange={(e) => {
-        const copy = [...dishDraft.modifiers];
-
-        copy[i].type = e.target.value;
-
-        setDishDraft((d) => ({
-          ...d,
-          modifiers: copy,
-        }));
-      }}
-      className="modifier-type-select"
-    >
-     
-     <option value="addon">
-  {t("itemForm.addon")}
-</option>
-
-<option value="variant">
-  {t("itemForm.variant")}
-</option>
-    </select>
-
+   
   </div>
 ))}
 

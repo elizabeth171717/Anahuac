@@ -59,7 +59,7 @@ display: flex;
   padding: .50rem 0;
   display: flex;
   justify-content: right;
-  gap: 1.25rem;
+  gap: 1.50rem;
  
 }
 
@@ -110,7 +110,7 @@ gap: .50rem;}
    DESCRIPTION
 ========================================= */
 .item-description {
-  margin: .50rem 0;
+ 
   color: #6b7280;
  
 }
@@ -126,10 +126,11 @@ gap: .50rem;}
 ========================================= */
 .modifiers-section,
 .custom-properties-section {
-  margin-top: 6px;
+  margin-top: 5px;
   background: #f9fafb;
-  padding: 8px;
+  padding: 5px;
   border-radius: 12px;
+   border: 1px solid  #dddee0;
 }
 
 .modifiers,
@@ -163,14 +164,21 @@ font-weight: bold;
 
 
 .view-status-card {
+ border: 1px solid  #dddee0;
   display: flex;
   align-items: center;
-  gap: .20rem;
+  gap: 1rem;
 font-size:small;
+
+ margin-top: 5px;
+  background: #f9fafb;
+  padding: 5px;
+  border-radius: 12px;
 }
 
 .view-name{
   font-weight: bold;
+  
 }
 
 .item-modifier-row {
@@ -190,3 +198,4 @@ font-size:small;
 .modifier-type-select {
   width: 120px;
 }
+
