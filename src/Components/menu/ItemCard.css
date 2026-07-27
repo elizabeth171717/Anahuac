@@ -59,7 +59,7 @@ display: flex;
   padding: .50rem 0;
   display: flex;
   justify-content: right;
-  gap: 1.50rem;
+  gap:2rem;
  
 }
 
@@ -179,7 +179,8 @@ font-size:small;
 
 .view-name{
   font-weight: bold;
-  
+  display: flex;
+  gap: .25rem;
 }
 
 .item-modifier-row {

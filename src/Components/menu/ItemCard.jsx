@@ -166,18 +166,19 @@ const { t } = useTranslation();
           className="view-status-card"
         >
           
-
+ 
           <span className="view-name">
-            {view.name}
-          </span>
-
-         
-           {overridePrice !== undefined &&
+            {overridePrice !== undefined &&
             overridePrice !== null && (
               <span className="view-price-inline">
                 ${Number(overridePrice).toFixed(2)}
               </span>
           )}
+            {view.name}
+          </span>
+
+         
+          
           <span>
             {settings.visible
               ? `👁️ ${t("itemCard.visible")}`
