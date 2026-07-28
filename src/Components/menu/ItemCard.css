@@ -24,7 +24,7 @@ display: flex;
   gap: 1rem;
   
   scroll-behavior: smooth;
-  
+ 
   -webkit-overflow-scrolling: touch;
   margin: 1rem ;
 }
@@ -45,7 +45,6 @@ display: flex;
 
   min-height: 230px;
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   border: 1px solid #e5e7eb;
  position: relative;   /* IMPORTANT */
   overflow: hidden;
