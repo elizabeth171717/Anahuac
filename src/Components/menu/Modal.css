@@ -150,3 +150,43 @@ margin:.25rem;
   color: white;
   border-color: #6e234f;
 }
+
+/* MODIFIER ROW */
+.item-modifier-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* PROPERTY ROW */
+.costume-property-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* DELETE BUTTONS */
+.modifier-delete-btn,
+.custom-property-delete-btn {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #777;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease;
+}
+
+.modifier-delete-btn:hover,
+.custom-property-delete-btn:hover {
+  background: rgba(110, 35, 79, 0.1);
+  color: #6e234f;
+}

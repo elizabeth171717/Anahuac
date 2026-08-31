@@ -328,7 +328,20 @@ const { t } = useTranslation();
   className="item-modifier-price-input"
 />
 
-   
+    <button
+      type="button"
+      className="modifier-delete-btn"
+      onClick={() => {
+        setDishDraft((d) => ({
+          ...d,
+          modifiers: d.modifiers.filter((_, index) => index !== i),
+        }));
+      }}
+      aria-label={t("itemForm.deleteModifier")}
+      title={t("itemForm.deleteModifier")}
+    >
+      ×
+    </button>
   </div>
 ))}
 
@@ -391,7 +404,23 @@ const { t } = useTranslation();
       }}
       className="item-custom-property-value-input"
     />
-
+{/* DELETE PROPERTY */}
+    <button
+      type="button"
+      className="custom-property-delete-btn"
+      onClick={() => {
+        setDishDraft((d) => ({
+          ...d,
+          customProperties: d.customProperties.filter(
+            (_, index) => index !== i
+          ),
+        }));
+      }}
+      aria-label={t("itemForm.deleteProperty")}
+      title={t("itemForm.deleteProperty")}
+    >
+      ×
+    </button>
   </div>
 ))}
 
