@@ -264,14 +264,23 @@ const { t } = useTranslation();
   return (
     <div ref={setNodeRef} style={style} className="menu-section">
       <div className="section-tittle-wrapper">
-        <div className="title-container">
-          {isOwner && (
-          <span className="drag-handle" {...attributes} {...listeners}>
-            <GripVertical className="icon drag-icon" />
-          </span>
-          )}
-          <h2>{section.section}</h2>
-        </div>
+       <div className="title-container">
+  {isOwner && (
+    <span className="drag-handle" {...attributes} {...listeners}>
+      <GripVertical className="icon drag-icon" />
+    </span>
+  )}
+
+  <div className="section-heading">
+    <h2>{section.section}</h2>
+
+    {section.description && (
+      <p className="section-description">
+        {section.description}
+      </p>
+    )}
+  </div>
+</div>
 
         <div className="icons">
            {isOwner && (

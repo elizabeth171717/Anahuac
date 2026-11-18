@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 export default function SectionForm({
   draftSectionName,
   setDraftSectionName,
+   draftSectionDescription,
+  setDraftSectionDescription,
   onCancel,
   onSave,
   isEditing,
@@ -22,6 +24,14 @@ export default function SectionForm({
           onChange={(e) => setDraftSectionName(e.target.value)}
           placeholder={t("sectionForm.name")}
           className="section-name-input"
+        />
+
+         <textarea
+          value={draftSectionDescription}
+          onChange={(e) => setDraftSectionDescription(e.target.value)}
+          placeholder="Section description..."
+          className="menu-description-input"
+          rows={3}
         />
 
         <div className="action-buttons-container">

@@ -1,16 +1,23 @@
 /* =========================================
    MODAL OVERLAY
 ========================================= */
+
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(17, 24, 39, 0.55); /* matches your dark button tone */
+  background: rgba(17, 24, 39, 0.55);
   backdrop-filter: blur(6px);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   z-index: 999;
   padding: 16px;
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
 }
 
 /* =========================================
@@ -189,4 +196,21 @@ margin:.25rem;
 .custom-property-delete-btn:hover {
   background: rgba(110, 35, 79, 0.1);
   color: #6e234f;
+}
+
+
+/* PREVENT BACKGROUND SCROLL WHILE MODAL IS OPEN */
+/* Prevent background scrolling when interacting with a modal */
+.modal-overlay {
+  overscroll-behavior: contain;
+}
+
+.modal-content {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide the fixed Master Save button whenever a modal is open */
+body:has(.modal-overlay) .save-menu-btn {
+  display: none !important;
 }

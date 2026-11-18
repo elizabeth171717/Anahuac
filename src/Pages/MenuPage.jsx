@@ -12,7 +12,9 @@ import axios from "axios";
 import SectionForm from "../Components/menu/SectionForm";
 import { BACKEND_URL } from "../constants/constants";
 import Section from "../Components/menu/Section";
-import RestaurantNameEditor from "../Components/menu/RestaurantNameEditor";
+
+import RestaurantName from "../Components/menu/RestaurantName/RestaurantName";
+import RestaurantNameForm from "../Components/menu/RestaurantName/RestaurantNameForm";
 import MenuViewsForm from "../Components/menu/MenuViewsForm";
 
 const client = import.meta.env.VITE_CLIENT;
@@ -34,7 +36,11 @@ const [viewsDraft, setViewsDraft] =
   const [showSectionForm, setShowSectionForm] = useState(false);
   const [draftSectionName, setDraftSectionName] = useState("");
   const [editingSectionId, setEditingSectionId] = useState(null);
-
+// RESTAURANT MODAL
+  const [showRestaurantForm, setShowRestaurantForm] = useState(false);
+  const [draftRestaurantName, setDraftRestaurantName] = useState("");
+  const [draftMenuDescription, setDraftMenuDescription] = useState("");
+const [draftSectionDescription, setDraftSectionDescription] = useState("");
   const { t } = useTranslation();
   // ✅ FETCH MENU
   useEffect(() => {
@@ -108,45 +114,72 @@ const saveViews = () => {
   setShowViewsForm(false);
 };
 
+ 
+ // OPEN RESTAURANT FORM
+  const openRestaurantForm = () => {
+    setDraftRestaurantName(menu.restaurantName || "");
+    setDraftMenuDescription(menu.menuDescription || "");
+
+    setShowRestaurantForm(true);
+  };
+
+  // SAVE RESTAURANT DRAFT TO MENU STATE
+  const saveRestaurant = () => {
+    if (!draftRestaurantName.trim()) return;
+
+    setMenu((prev) => ({
+      ...prev,
+      restaurantName: draftRestaurantName.trim(),
+      menuDescription: draftMenuDescription.trim(),
+    }));
+
+    setShowRestaurantForm(false);
+  };
+
   const handleAddSection = () => {
     setDraftSectionName("");
+    setDraftSectionDescription("");
+
     setEditingSectionId(null);
     setShowSectionForm(true);
   };
 
   // ✅ CREATE SECTION FROM MODAL
   const createSection = () => {
-    if (!draftSectionName.trim()) return;
+  if (!draftSectionName.trim()) return;
 
-    setMenu((prev) => {
-      const menu = structuredClone(prev);
+  setMenu((prev) => {
+    const menu = structuredClone(prev);
 
-      if (!menu.sections) menu.sections = [];
+    if (!menu.sections) menu.sections = [];
 
-      if (editingSectionId) {
-        // EDIT MODE
-        const index = menu.sections.findIndex((s) => s.id === editingSectionId);
+    if (editingSectionId) {
+      const index = menu.sections.findIndex(
+        (s) => s.id === editingSectionId
+      );
 
-        if (index !== -1) {
-          menu.sections[index].section = draftSectionName;
-        }
-      } else {
-        // CREATE MODE
-        menu.sections.unshift({
-          id: crypto.randomUUID(),
-          section: draftSectionName,
-          items: [],
-          groups: [],
-        });
+      if (index !== -1) {
+        menu.sections[index].section = draftSectionName.trim();
+        menu.sections[index].description = draftSectionDescription.trim();
       }
+    } else {
+      menu.sections.unshift({
+        id: crypto.randomUUID(),
+        section: draftSectionName.trim(),
+        description: draftSectionDescription.trim(),
+        items: [],
+        groups: [],
+      });
+    }
 
-      return menu;
-    });
+    return menu;
+  });
 
-    setDraftSectionName("");
-    setEditingSectionId(null);
-    setShowSectionForm(false);
-  };
+  setDraftSectionName("");
+  setDraftSectionDescription("");
+  setEditingSectionId(null);
+  setShowSectionForm(false);
+};
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
@@ -195,14 +228,25 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
         {/* RESTAURANT NAME */}
         <div className="menu-name-container">
           {isOwner ? (
-  <RestaurantNameEditor
-    menu={menu}
-    setMenu={setMenu}
-  />
-  
-) : (
-  <h1>{menu.restaurantName}</h1>
-)}
+    <RestaurantName
+      menu={menu}
+      isOwner={isOwner}
+      setMenu={setMenu}
+      onEditRestaurant={openRestaurantForm}
+    />
+  ) : (
+     <div className="restaurant-name-editor">
+      <h1 className="restaurant-name">
+        {menu.restaurantName}
+      </h1>
+
+      {menu.menuDescription && (
+        <p className="menu-description">
+          {menu.menuDescription}
+        </p>
+      )}
+    </div>
+  )}
   
 
  {/* ADD SECTION BUTTON */}
@@ -250,6 +294,7 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
                   isOwner={isOwner}
                 onEditSection={(section) => {
                   setDraftSectionName(section.section);
+                  setDraftSectionDescription(section.description || "");
                   setEditingSectionId(section.id);
                   setShowSectionForm(true);
                 }}
@@ -260,15 +305,30 @@ console.log("MENU VIEWS IN RENDER:", menu.views);
         </DndContext>
       </div>
 
+       {/* RESTAURANT FORM */}
+      {isOwner && showRestaurantForm && (
+        <RestaurantNameForm
+          draftRestaurantName={draftRestaurantName}
+          setDraftRestaurantName={setDraftRestaurantName}
+          draftMenuDescription={draftMenuDescription}
+          setDraftMenuDescription={setDraftMenuDescription}
+          onCancel={() => setShowRestaurantForm(false)}
+          onSave={saveRestaurant}
+        />
+      )}
+
       {/* ⭐ SECTION CREATION MODAL ⭐ */}
       {showSectionForm && (
         <SectionForm
           draftSectionName={draftSectionName}
           setDraftSectionName={setDraftSectionName}
+           draftSectionDescription={draftSectionDescription}
+    setDraftSectionDescription={setDraftSectionDescription}
           onCancel={() => {
             setShowSectionForm(false);
             setEditingSectionId(null);
             setDraftSectionName("");
+            setDraftSectionDescription("");
           }}
           onSave={createSection}
           isEditing={!!editingSectionId}
