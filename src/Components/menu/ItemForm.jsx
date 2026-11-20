@@ -33,6 +33,7 @@ const { t } = useTranslation();
   return (
     <div className="modal-overlay">
       <div className="modal-content">
+        <div className="modal-scroll-content">
         <h2 className="editing-target-title">
          
             {editingTarget ? t("itemForm.editTitle") : t("itemForm.addTitle")}
@@ -480,6 +481,7 @@ const { t } = useTranslation();
       </button>
     );
   })}
+</div>
 </div>
 
         {/* ACTIONS */}
